@@ -51,7 +51,7 @@ p {
 }
 
 .text-content {
-  max-width: 70%;
+  max-width: 50%;
 }
   
 section {
@@ -60,7 +60,7 @@ section {
 }
 
 .image-content img {
-  max-width: 200px;
+  max-width: 300px;
   height: auto; /* Keep the aspect ratio */
 }
 
