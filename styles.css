@@ -27,16 +27,18 @@ header nav a:hover {
 
 #about {
   padding: 20px;
+  position: relative;
 }
 
 .about-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  position: relative;
   gap: 20px; /* Space between text and image */
 }
 
 .text-content {
-  flex: 1; /* Let the text take up available space */
+  max-width: 60%;
 }
   
 section {
@@ -44,8 +46,13 @@ section {
   font-family: 'Iceland', sans-serif;
 }
 
+.image-content {
+  position: absolute;
+  top:60px;
+  right: 0;
+
 .image-content img {
-  max-width: 200px;
+  max-width: 400px;
   height: auto; /* Keep the aspect ratio */
 }
 
