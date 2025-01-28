@@ -25,6 +25,19 @@ header nav a:hover {
   color: #99FFFF; /* Ice blue text color on hover */
 }
 
+h1 {
+  font-size: 48px; /* Big main heading */
+  text-shadow: 0 0 8px #0ff, 0 0 16px #0ff;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+p {
+  font-size: 20px;
+}
+
 #about {
   padding: 20px;
   position: relative;
