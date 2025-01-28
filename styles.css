@@ -60,7 +60,7 @@ section {
 }
 
 .image-content img {
-  max-width: 400px;
+  max-width: 200px;
   height: auto; /* Keep the aspect ratio */
 }
 
