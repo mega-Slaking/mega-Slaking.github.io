@@ -25,14 +25,28 @@ header nav a:hover {
   color: #99FFFF; /* Ice blue text color on hover */
 }
 
+#about {
+  padding: 20px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between text and image */
+}
+
+.text-content {
+  flex: 1; /* Let the text take up available space */
+}
+  
 section {
   padding: 20px;
   font-family: 'Iceland', sans-serif;
 }
 
-img {
-  width: 30%; /* Make the image take the full width of its container */
-  height: auto; /* Keep the aspect ratio intact */
+.image-content img {
+  max-width: 200px;
+  height: auto; /* Keep the aspect ratio */
 }
 
 footer {
