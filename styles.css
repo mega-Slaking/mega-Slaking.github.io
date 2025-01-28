@@ -44,14 +44,13 @@ p {
 
 #about {
   padding: 20px;
-  position: flex;
-  justify-content: center;
+  position: relative;
 }
 
 .about-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 20px; /* Space between text and image */
 }
 
