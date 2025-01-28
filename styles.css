@@ -34,6 +34,10 @@ h2 {
   font-size: 36px;
 }
 
+h3 {
+  font-size: 24px;
+}
+
 p {
   font-size: 20px;
 }
@@ -45,8 +49,8 @@ p {
 
 .about-container {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   gap: 20px; /* Space between text and image */
 }
 
