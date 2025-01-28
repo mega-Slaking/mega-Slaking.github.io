@@ -30,6 +30,11 @@ section {
   font-family: 'Iceland', sans-serif;
 }
 
+img {
+  width: 30%; /* Make the image take the full width of its container */
+  height: auto; /* Keep the aspect ratio intact */
+}
+
 footer {
   background: #333;
   color: white;
