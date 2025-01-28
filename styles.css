@@ -1,5 +1,7 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Iceland', sans-serif;
+  background-color: #000; /* Dark brackground */
+  color: #99FFFF; /* Ice Blue Text */
   margin: 0;
   padding: 0;
 }
@@ -9,16 +11,23 @@ header {
   color: white;
   padding: 10px 20px;
   text-align: center;
+  font-family: 'Iceland', sans-serif;
 }
 
 header nav a {
   color: white;
   margin: 0 10px;
   text-decoration: none;
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+header nav a:hover {
+  color: #99FFFF; /* Ice blue text color on hover */
 }
 
 section {
   padding: 20px;
+  font-family: 'Iceland', sans-serif;
 }
 
 footer {
@@ -26,4 +35,5 @@ footer {
   color: white;
   text-align: center;
   padding: 10px;
+  font-family: 'Iceland', sans-serif;
 }
