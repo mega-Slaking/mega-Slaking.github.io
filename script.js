@@ -7,3 +7,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Toggle Expand/Collapse Section for Projects
+document.querySelector(".toggle-btn").addEventListener("click", function () {
+  const hiddenContent = document.querySelector(".hidden-content");
+    
+  hiddenContent.style.display = hiddenContent.style.display === "block" ? "none" : "block";
+
+  // Update button text based on visibility
+  this.textContent = hiddenContent.style.display === "block" ? "Collapse Details" : "View More Details";
+});

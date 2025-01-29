@@ -90,6 +90,51 @@ section {
   }
 }
 
+/* Button Style */
+.toggle-btn {
+  background-color: #0ff;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-family: 'Iceland', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.toggle-btn:hover {
+  background-color: #00aaff;
+}
+
+.hidden-content {
+  display: none;
+  background-color: #111;
+  padding: 15px;
+  margin-top: 10px;
+  border-left: 3px solid #0ff;
+  color: #0ff;
+  animation: fadeIn 0.5s ease-in-out;
+  font-family: 'Iceland', sans-serif;
+}
+
+.project-gif {
+  width: 100%;
+  max-width: 400px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 footer {
   background: #333;
   color: white;
