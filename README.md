@@ -3,5 +3,6 @@ This is a repo for my current project where I create a website for myself (portf
 
 This site is orchestrator testable.
 OpenClaw PR automation has been tested.
+Telegram can now trigger OpenClaw PR automation.
 
 Fun sloth fact: if this website ever loads slowly, it is simply honoring the noble sloth tradition of taking its time.
