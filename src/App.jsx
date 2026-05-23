@@ -1,4 +1,49 @@
+import { useEffect } from 'react';
+
+import profileImage from '../profile.jpg';
+import thesisPdf from '../theory_methods_marked.pdf';
+import xFieldGif from '../gifs/X_field.gif';
+import yFieldGif from '../gifs/y_field.gif';
+import zFieldGif from '../gifs/z_field.gif';
+import yzFieldGif from '../gifs/yz_field.gif';
+import waterGif from '../gifs/yes.gif';
+
 function App() {
+  useEffect(() => {
+    const anchorListeners = [];
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      const onClick = (event) => {
+        event.preventDefault();
+        document.querySelector(anchor.getAttribute('href'))?.scrollIntoView({
+          behavior: 'smooth',
+        });
+      };
+
+      anchor.addEventListener('click', onClick);
+      anchorListeners.push([anchor, onClick]);
+    });
+
+    const toggleListeners = [];
+
+    document.querySelectorAll('.toggle-btn').forEach((button) => {
+      const onClick = () => {
+        const hiddenContent = button.nextElementSibling;
+
+        hiddenContent.style.display = hiddenContent.style.display === 'block' ? 'none' : 'block';
+        button.textContent = hiddenContent.style.display === 'block' ? 'Collapse Details' : 'View More Details';
+      };
+
+      button.addEventListener('click', onClick);
+      toggleListeners.push([button, onClick]);
+    });
+
+    return () => {
+      anchorListeners.forEach(([anchor, onClick]) => anchor.removeEventListener('click', onClick));
+      toggleListeners.forEach(([button, onClick]) => button.removeEventListener('click', onClick));
+    };
+  }, []);
+
   return (
     <>
       <header>
@@ -25,7 +70,7 @@ function App() {
             </p>
           </div>
           <div className="image-content">
-            <img src="/profile.jpg" alt="Profile Picture" />
+            <img src={profileImage} alt="Profile Picture" />
           </div>
         </div>
       </section>
@@ -85,18 +130,18 @@ function App() {
               </li>
               <li>
                 Check this file out{' '}
-                <a href="/theory_methods_marked.pdf" target="_blank" rel="noreferrer">
+                <a href={thesisPdf} target="_blank" rel="noreferrer">
                   here
                 </a>{' '}
                 to view the methods used to create these predictive models.
               </li>
             </ul>
 
-            <img src="/gifs/y_field.gif" alt="Application of y-electric field" className="project-gif" />
-            <img src="/gifs/X_field.gif" alt="Application of x-electric field" className="project-gif" />
-            <img src="/gifs/z_field.gif" alt="Application of z-electric field" className="project-gif" />
-            <img src="/gifs/yz_field.gif" alt="Application of yz-electric field" className="project-gif" />
-            <img src="/gifs/yes.gif" alt="Modelling Glycine in water" className="project-gif" />
+            <img src={yFieldGif} alt="Application of y-electric field" className="project-gif" />
+            <img src={xFieldGif} alt="Application of x-electric field" className="project-gif" />
+            <img src={zFieldGif} alt="Application of z-electric field" className="project-gif" />
+            <img src={yzFieldGif} alt="Application of yz-electric field" className="project-gif" />
+            <img src={waterGif} alt="Modelling Glycine in water" className="project-gif" />
           </div>
 
           <h3>Cartier Data Analysis Project</h3>
