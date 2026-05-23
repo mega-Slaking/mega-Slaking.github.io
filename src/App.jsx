@@ -7,6 +7,7 @@ import yFieldGif from '../gifs/y_field.gif';
 import zFieldGif from '../gifs/z_field.gif';
 import yzFieldGif from '../gifs/yz_field.gif';
 import waterGif from '../gifs/yes.gif';
+import PixelClickEffect from './PixelClickEffect.jsx';
 
 function getRoute() {
   if (window.location.hash === '#/projects') {
@@ -67,6 +68,7 @@ function App() {
 
   return (
     <>
+      <PixelClickEffect />
       <Header />
       {route === 'projects' ? <ProjectsPage /> : null}
       {route === 'experience' ? <ExperiencePage /> : null}

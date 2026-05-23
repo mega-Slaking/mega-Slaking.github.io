@@ -6,6 +6,42 @@ body {
   padding: 0;
 }
 
+.pixel-click-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.pixel-click-particle {
+  position: fixed;
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: pixel-burst var(--pixel-duration) ease-out var(--pixel-delay) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes pixel-burst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--pixel-dx)), calc(-50% + var(--pixel-dy)))
+      scale(0.4)
+      rotate(var(--pixel-rotation));
+  }
+}
+
 header {
   background: #333;
   color: white;
@@ -328,5 +364,11 @@ footer {
   .text-content,
   .text-container {
     max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-click-particle {
+    animation-timing-function: linear;
   }
 }
