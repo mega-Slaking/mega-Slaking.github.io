@@ -117,7 +117,7 @@ function AboutSection() {
     <section id="about">
       <div className="about-container">
         <div className="text-container">
-          <h2>About Me</h2>
+          <h2>Me</h2>
           <p>
             Ambitious and adaptable, I am a Bachelor of Science graduate from the University of Sydney with majors in
             Physics and Chemistry (Honours - First Class). I excel in problem-solving, thrive in diverse environments,
