@@ -372,3 +372,112 @@ footer {
     animation-timing-function: linear;
   }
 }
+
+/* ===== ShatterCard ===== */
+
+.shatter-card {
+  display: flex;
+  min-height: 180px;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #0ff;
+  border-radius: 8px;
+  background: #111;
+  color: #99FFFF;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+.shatter-card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.5);
+}
+
+.shatter-card--hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 0 18px rgba(0, 255, 255, 0.45),
+    0 0 42px rgba(0, 255, 255, 0.15);
+}
+
+/* Chromatic aberration on label during hover */
+.shatter-card--hover .shatter-card__label {
+  text-shadow:
+    -2px 0 2px rgba(255, 30, 80, 0.55),
+    2px 0 2px rgba(0, 240, 255, 0.55);
+}
+
+/* Allow fragments to escape the card bounds during shatter */
+.shatter-card--shatter {
+  overflow: visible;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+}
+
+.shatter-card__label {
+  font-size: 40px;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.05s;
+}
+
+/* Crack SVG overlay */
+.shatter-card__cracks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.shatter-card__cracks line {
+  stroke: rgba(160, 235, 255, 0.92);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+  /* Animate each crack line drawing itself in */
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  filter: drop-shadow(0 0 2px rgba(0, 210, 255, 0.85));
+  animation: sc-draw-crack 0.2s ease-out forwards;
+}
+
+@keyframes sc-draw-crack {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Fragment shards */
+.shatter-fragment {
+  position: absolute;
+  inset: 0;
+  background: #111;
+  z-index: 3;
+  pointer-events: none;
+  /* Slight blue-tinted gloss to sell the glass aesthetic */
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 160, 220, 0.07) 0%,
+    transparent 55%
+  );
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.38s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shatter-card,
+  .shatter-card__label,
+  .shatter-fragment {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from 'react';
+import { ShatterCard } from './ShatterCard.jsx';
 
 import profileImage from '../profile.jpg';
 import thesisPdf from '../theory_methods_marked.pdf';
@@ -99,12 +100,8 @@ function HomePage() {
       <section id="projects">
         <h2>Projects and Experience</h2>
         <div className="section-picker" aria-label="Projects and experience navigation">
-          <a className="section-card" href="#/projects">
-            <span>Projects</span>
-          </a>
-          <a className="section-card" href="#/experience">
-            <span>Experience</span>
-          </a>
+          <ShatterCard label="Projects" href="#/projects" />
+          <ShatterCard label="Experience" href="#/experience" />
         </div>
       </section>
       <ContactSection />
