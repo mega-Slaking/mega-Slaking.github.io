@@ -143,10 +143,49 @@ function ProjectsPage() {
         <ExpandableItem
           variant="project"
           title="Systematic Trading Algorithm"
-          summary="Developed a systematic bond allocation engine that integrates macroeconomic regime classification with price-based momentum to drive allocation decisions across a US fixed-income universe."
+          summary="A modular quantitative research and backtesting platform for testing systematic bond ETF allocation strategies using macro regimes, price signals, volatility/covariance models, scenario factories, SQLite persistence, and Streamlit analytics dashboards."
           buttonText="More details"
         >
-          <p>Link to see publicly availible code and READme:</p>
+          <p>
+            Built a modular quantitative research platform for testing systematic asset-allocation strategies across bond
+            ETFs, macroeconomic regimes, volatility models, and portfolio construction rules. The platform ingests market
+            and macroeconomic data, computes price and macro signals, classifies economic/monetary regimes, generates
+            allocation decisions, applies risk-aware sizing and constraints, persists scenario results to SQLite, and
+            surfaces performance analytics through a Streamlit dashboard.
+          </p>
+          <p>Key highlights include:</p>
+          <ul>
+            <li>
+              Built a modular Python research platform for systematic asset-allocation experiments across bond ETFs
+              including TLT, AGG, and SHY.
+            </li>
+            <li>
+              Designed a decision-centric strategy pipeline covering macro/price signal generation, regime
+              classification, base allocation, volatility-aware position sizing, portfolio constraints, and final
+              allocation tracing.
+            </li>
+            <li>
+              Implemented scenario factories to compare strategy variants across EWMA/GARCH volatility models,
+              sample/EWMA covariance scaling, conviction scaling, and portfolio volatility targeting.
+            </li>
+            <li>
+              Persisted backtest results, decision traces, costs, turnover, NAV, and scenario metadata into SQLite for
+              reproducible experiment tracking.
+            </li>
+            <li>
+              Built Streamlit dashboards and tearsheet analytics for NAV comparison, return analysis, drawdowns,
+              Sharpe/Sortino/Calmar, VaR/CVaR, turnover, cost drag, and ETF price inspection.
+            </li>
+            <li>
+              Optimized expensive covariance calculations using C++/pybind11 integration, precomputed return views, and
+              caching to improve scenario-testing performance.
+            </li>
+            <li>
+              Refactored macro data handling to store raw FRED series only while computing derived features such as
+              inflation direction, yield curve, labour weakness, and growth signals at runtime.
+            </li>
+          </ul>
+          <p>Link to see publicly available code and README:</p>
           <ul>
             <li>
               <a href="https://github.com/mega-Slaking/systematic_trading_model" target="_blank" rel="noreferrer">
