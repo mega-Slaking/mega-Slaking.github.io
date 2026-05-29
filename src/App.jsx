@@ -142,7 +142,7 @@ function ProjectsPage() {
       <div className="project-grid">
         <ExpandableItem
           variant="project"
-          title="Systematic Trading Algorithm"
+          title="Systematic Quantitative Research & Backtesting Platform"
           summary="A modular quantitative research and backtesting platform for testing systematic bond ETF allocation strategies using macro regimes, price signals, volatility/covariance models, scenario factories, SQLite persistence, and Streamlit analytics dashboards."
           buttonText="More details"
         >
