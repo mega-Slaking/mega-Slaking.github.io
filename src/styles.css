@@ -203,8 +203,8 @@ li {
 .about-container {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 20px; /* Space between text and image */
+  align-items: center;
+  gap: 20px;
 }
 
 .text-content,
@@ -225,7 +225,9 @@ section {
 
 .image-content img {
   max-width: 250px;
-  height: auto; /* Keep the aspect ratio */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 28px rgba(0, 255, 255, 0.18), 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .toggle-btn {
@@ -324,6 +326,34 @@ footer {
   text-align: center;
   padding: 10px;
   font-family: 'Iceland', sans-serif;
+}
+
+@media (min-width: 769px) {
+  #about {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 40px 32px;
+  }
+
+  .about-container {
+    gap: 48px;
+  }
+
+  .text-content,
+  .text-container {
+    flex: 1 1 0;
+    max-width: none;
+  }
+
+  .image-content img {
+    max-width: 310px;
+  }
+
+  #projects {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 48px;
+  }
 }
 
 @media (max-width: 768px) {
