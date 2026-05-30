@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from 'react';
+import { ShatterCard } from './ShatterCard.jsx';
 
 import profileImage from '../profile.jpg';
 import thesisPdf from '../theory_methods_marked.pdf';
@@ -99,12 +100,8 @@ function HomePage() {
       <section id="projects">
         <h2>Projects and Experience</h2>
         <div className="section-picker" aria-label="Projects and experience navigation">
-          <a className="section-card" href="#/projects">
-            <span>Projects</span>
-          </a>
-          <a className="section-card" href="#/experience">
-            <span>Experience</span>
-          </a>
+          <ShatterCard label="Projects" href="#/projects" />
+          <ShatterCard label="Experience" href="#/experience" />
         </div>
       </section>
       <ContactSection />
@@ -145,13 +142,50 @@ function ProjectsPage() {
       <div className="project-grid">
         <ExpandableItem
           variant="project"
-          title="Systematic Trading Algorithm"
-          summary="Developed a systematic bond allocation engine that integrates macroeconomic regime classification with price-based momentum to drive allocation decisions across a US fixed-income universe."
+          title="Systematic Quantitative Research & Backtesting Platform"
+          summary="A modular quantitative research and backtesting platform for testing systematic bond ETF allocation strategies using macro regimes, price signals, volatility/covariance models, scenario factories, SQLite persistence, and Streamlit analytics dashboards."
           buttonText="More details"
         >
-          <p>Link to see publicly availible code and READme:</p>
+          <p>
+            Built a modular quantitative research platform for testing systematic asset-allocation strategies across bond
+            ETFs, macroeconomic regimes, volatility models, and portfolio construction rules. The platform ingests market
+            and macroeconomic data, computes price and macro signals, classifies economic/monetary regimes, generates
+            allocation decisions, applies risk-aware sizing and constraints, persists scenario results to SQLite, and
+            surfaces performance analytics through a Streamlit dashboard.
+          </p>
+          <p>Highlights of this project include:</p>
           <ul>
             <li>
+              Built a modular Python research platform for systematic asset-allocation experiments across bond ETFs
+              including TLT, AGG, and SHY.
+            </li>
+            <li>
+              Designed a decision-centric strategy pipeline covering macro/price signal generation, regime
+              classification, base allocation, volatility-aware position sizing, portfolio constraints, and final
+              allocation tracing.
+            </li>
+            <li>
+              Implemented scenario factories to compare strategy variants across EWMA/GARCH volatility models,
+              sample/EWMA covariance scaling, conviction scaling, and portfolio volatility targeting.
+            </li>
+            <li>
+              Persisted backtest results, decision traces, costs, turnover, NAV, and scenario metadata into SQLite for
+              reproducible experiment tracking.
+            </li>
+            <li>
+              Built Streamlit dashboards and tearsheet analytics for NAV comparison, return analysis, drawdowns,
+              Sharpe/Sortino/Calmar, VaR/CVaR, turnover, cost drag, and ETF price inspection.
+            </li>
+            <li>
+              Optimized expensive covariance calculations using C++/pybind11 integration, precomputed return views, and
+              caching to improve scenario-testing performance.
+            </li>
+            <li>
+              Refactored macro data handling to store raw FRED series only while computing derived features such as
+              inflation direction, yield curve, labour weakness, and growth signals at runtime.
+            </li>
+            <li>
+              View the publicly available code and README:{' '}
               <a href="https://github.com/mega-Slaking/systematic_trading_model" target="_blank" rel="noreferrer">
                 https://github.com/mega-Slaking/systematic_trading_model
               </a>
@@ -235,6 +269,41 @@ function ProjectsPage() {
             <li>
               Data-Driven Recommendations: Leveraged insights and research on the psychology of zoning to propose boutique
               rezoning strategies aimed at optimizing customer flow and increasing engagement with key product categories.
+            </li>
+          </ul>
+        </ExpandableItem>
+
+        <ExpandableItem
+          variant="project"
+          title="Raspberry Pi AI-Assisted Development Orchestrator"
+          summary="A Raspberry Pi-hosted AI development orchestrator that lets me trigger Claude/OpenClaw coding tasks from Telegram, automatically create PRs from safe feature branches, run validation checks, and preview frontend changes privately over Tailscale before merging."
+          buttonText="More details"
+        >
+          <p>
+            Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub,
+            Claude Code, OpenClaw, and custom Python/Bash orchestration scripts. Highlights include:
+          </p>
+          <ul>
+            <li>
+              Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude
+              Code, OpenClaw, Python, and Bash.
+            </li>
+            <li>
+              Designed a phone-first development workflow where Telegram commands trigger scoped AI coding tasks, branch
+              creation, validation, PR generation, and private preview links.
+            </li>
+            <li>
+              Implemented branch safety controls including dev-branch integration, protected main/master avoidance,
+              task-specific branch prefixes, dirty-working-tree checks, and manual PR review boundaries.
+            </li>
+            <li>
+              Integrated Tailscale to securely preview Vite/React frontend branches from a phone without exposing local
+              development servers to the public internet.
+            </li>
+            <li>
+              Added operational safeguards including AI task kill switches, model/cost control separation, timeout
+              handling, agent prompt guardrails, and separation between bot-owned Telegram control and agent-owned code
+              execution.
             </li>
           </ul>
         </ExpandableItem>
