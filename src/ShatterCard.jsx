@@ -105,12 +105,14 @@ export function ShatterCard({ label, href, className = '' }) {
         const dx = f.cx - (ox / W) * 100;
         const dy = f.cy - (oy / H) * 100;
         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const speed = 85 + Math.random() * 75;
+        const speed = 120 + Math.random() * 100;
         vels[f.id] = {
           tx: (dx / dist) * speed,
           ty: (dy / dist) * speed,
-          rot: (Math.random() - 0.5) * 40,
-          delay: Math.random() * 80,
+          rot: (Math.random() - 0.5) * 60,
+          scale: 1.08 + Math.random() * 0.22,
+          brightness: 1.25 + Math.random() * 0.35,
+          delay: Math.random() * 55,
         };
       });
 
@@ -126,7 +128,7 @@ export function ShatterCard({ label, href, className = '' }) {
 
       setTimeout(() => {
         window.location.hash = href;
-      }, 620);
+      }, 1000);
     },
     [phase, href]
   );
@@ -194,7 +196,10 @@ export function ShatterCard({ label, href, className = '' }) {
               style={{
                 clipPath: `polygon(${f.polygon})`,
                 transform: isExploding
-                  ? `translate(${v.tx ?? 0}px, ${v.ty ?? 0}px) rotate(${v.rot ?? 0}deg)`
+                  ? `translate(${v.tx ?? 0}px, ${v.ty ?? 0}px) rotate(${v.rot ?? 0}deg) scale(${v.scale ?? 1})`
+                  : 'none',
+                filter: isExploding
+                  ? `brightness(${v.brightness ?? 1.3}) blur(0.6px)`
                   : 'none',
                 opacity: isExploding ? 0 : 1,
                 transitionDelay: `${v.delay ?? 0}ms`,
