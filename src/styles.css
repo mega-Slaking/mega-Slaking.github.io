@@ -298,7 +298,7 @@ section {
 .hidden-content-open {
   margin-top: 14px;
   padding: 18px;
-  max-height: 2400px;
+  max-height: 3600px;
   opacity: 1;
   transform: translateY(0);
 }
@@ -310,6 +310,48 @@ section {
 
 .hidden-content ul {
   padding-left: 24px;
+}
+
+.project-grid .hidden-content li + li {
+  margin-top: 10px;
+}
+
+.hidden-content h4 {
+  font-size: 16px;
+  font-weight: normal;
+  color: #99FFFF;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(153, 255, 255, 0.2);
+  padding-bottom: 5px;
+  margin: 20px 0 8px;
+}
+
+.hidden-content h4:first-child {
+  margin-top: 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.project-tag {
+  background: rgba(0, 255, 255, 0.07);
+  border: 1px solid rgba(153, 255, 255, 0.28);
+  color: #99FFFF;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-family: 'Iceland', sans-serif;
+}
+
+.project-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .project-gif {
@@ -476,7 +518,7 @@ footer {
   stroke-dasharray: 600;
   stroke-dashoffset: 600;
   filter: drop-shadow(0 0 2px rgba(0, 210, 255, 0.85));
-  animation: sc-draw-crack 0.2s ease-out forwards;
+  animation: sc-draw-crack 0.3s ease-out forwards;
 }
 
 @keyframes sc-draw-crack {
@@ -495,12 +537,13 @@ footer {
   /* Slight blue-tinted gloss to sell the glass aesthetic */
   background-image: linear-gradient(
     135deg,
-    rgba(0, 160, 220, 0.07) 0%,
+    rgba(0, 160, 220, 0.12) 0%,
     transparent 55%
   );
   transition:
-    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    opacity 0.38s ease-out;
+    transform 0.9s cubic-bezier(0.15, 0.35, 0.25, 1),
+    opacity 0.65s ease-out,
+    filter 0.8s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
