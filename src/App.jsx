@@ -337,6 +337,41 @@ function ProjectsPage() {
             <span className="project-tag">OpenClaw</span>
           </div>
         </ExpandableItem>
+
+        <ExpandableItem
+          variant="project"
+          title="Raspberry Pi AI-Assisted Development Orchestrator"
+          summary="A Raspberry Pi-hosted AI development orchestrator that lets me trigger Claude/OpenClaw coding tasks from Telegram, automatically create PRs from safe feature branches, run validation checks, and preview frontend changes privately over Tailscale before merging."
+          buttonText="More details"
+        >
+          <p>
+            Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub,
+            Claude Code, OpenClaw, and custom Python/Bash orchestration scripts. Highlights include:
+          </p>
+          <ul>
+            <li>
+              Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude
+              Code, OpenClaw, Python, and Bash.
+            </li>
+            <li>
+              Designed a phone-first development workflow where Telegram commands trigger scoped AI coding tasks, branch
+              creation, validation, PR generation, and private preview links.
+            </li>
+            <li>
+              Implemented branch safety controls including dev-branch integration, protected main/master avoidance,
+              task-specific branch prefixes, dirty-working-tree checks, and manual PR review boundaries.
+            </li>
+            <li>
+              Integrated Tailscale to securely preview Vite/React frontend branches from a phone without exposing local
+              development servers to the public internet.
+            </li>
+            <li>
+              Added operational safeguards including AI task kill switches, model/cost control separation, timeout
+              handling, agent prompt guardrails, and separation between bot-owned Telegram control and agent-owned code
+              execution.
+            </li>
+          </ul>
+        </ExpandableItem>
       </div>
     </section>
   );
