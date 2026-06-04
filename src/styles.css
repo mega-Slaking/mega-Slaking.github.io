@@ -298,7 +298,7 @@ section {
 .hidden-content-open {
   margin-top: 14px;
   padding: 18px;
-  max-height: 2400px;
+  max-height: 3600px;
   opacity: 1;
   transform: translateY(0);
 }

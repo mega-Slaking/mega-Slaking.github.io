@@ -356,45 +356,66 @@ function ExperiencePage() {
           summary="Delivery of various requirements from Financial Markets Traders and Directors"
           buttonText="Things I have done working here"
         >
-          <p>Highlights of my work in this role include:</p>
+          <h4>Frontend Development</h4>
           <ul>
             <li>
-              Frontend Development: Built interactive and maintainable UIs using vanilla JavaScript and TypeScript with a
-              strong emphasis on object-oriented design. Designed and refactored custom UI components using event-driven
-              patterns and modular architecture without relying on external frameworks.
+              Built interactive and maintainable UIs using vanilla JavaScript and TypeScript with a strong emphasis on
+              object-oriented design. Designed and refactored custom UI components using event-driven patterns and modular
+              architecture without relying on external frameworks.
+            </li>
+          </ul>
+          <h4>Backend Development</h4>
+          <ul>
+            <li>
+              Developed robust backend logic in Java to support real-time APIs and complex business rules. Applied
+              principles of clean code, encapsulation, and service separation, especially in data transformation and
+              entitlement logic.
+            </li>
+          </ul>
+          <h4>Database &amp; Data Engineering</h4>
+          <ul>
+            <li>
+              Wrote and optimized SQL queries to support batch data processing, customer lookup, and pre-trade status
+              tracking, with a focus on performance and clarity.
             </li>
             <li>
-              Backend Development: Developed robust backend logic in Java to support real-time APIs and complex business
-              rules. Applied principles of clean code, encapsulation, and service separation, especially in data
-              transformation and entitlement logic.
+              Designed and optimized data pipelines and full-text search strategies to improve query performance and
+              accuracy. Applied indexing, batch processing, and filtering techniques to enhance scalability and user
+              experience across high-volume customer datasets.
             </li>
+          </ul>
+          <h4>Integration &amp; Infrastructure</h4>
+          <ul>
             <li>
-              Database &amp; Query Optimization: Wrote and optimized SQL queries to support batch data processing, customer
-              lookup, and pre-trade status tracking, with a focus on performance and clarity.
-            </li>
-            <li>
-              Cross-Layer Integration: Engineered seamless interactions between UI components and backend services,
-              managing session-aware logic, role-based filters, and dynamic API responses tailored to the user context.
-            </li>
-            <li>
-              Data Engineering &amp; Search Optimization: Designed and optimized data pipelines and full-text search
-              strategies to improve query performance and accuracy. Applied indexing, batch processing, and filtering
-              techniques to enhance scalability and user experience across high-volume customer datasets.
+              Engineered seamless interactions between UI components and backend services, managing session-aware logic,
+              role-based filters, and dynamic API responses tailored to the user context.
             </li>
             <li>
               Performed Linux administration to handle system configurations, performance monitoring, and troubleshooting
               for robust and stable infrastructure environments.
             </li>
+          </ul>
+          <h4>Testing &amp; Delivery</h4>
+          <ul>
             <li>
-              Testing &amp; Debugging: Used Cypress and JavaScript-based test harnesses to verify form behaviors, event
-              flows, and data consistency. Performed structured debugging and regression testing to improve UI reliability.
+              Used Cypress and JavaScript-based test harnesses to verify form behaviors, event flows, and data
+              consistency. Performed structured debugging and regression testing to improve UI reliability.
             </li>
             <li>
-              Version Control &amp; Collaboration: Worked with Git to manage feature branches, integrate with team
-              repositories, and maintain clear version histories. Contributed to documentation and maintainable code
-              practices.
+              Worked with Git to manage feature branches, integrate with team repositories, and maintain clear version
+              histories. Contributed to documentation and maintainable code practices.
             </li>
           </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">JavaScript</span>
+            <span className="project-tag">TypeScript</span>
+            <span className="project-tag">Java</span>
+            <span className="project-tag">SQL</span>
+            <span className="project-tag">Cypress</span>
+            <span className="project-tag">Git</span>
+            <span className="project-tag">Linux</span>
+          </div>
         </ExpandableItem>
 
         <ExpandableItem
@@ -403,34 +424,50 @@ function ExperiencePage() {
           summary="Delivered models, dashboards, and analytical outputs directly supporting Treasury funding strategy, issuance planning, and trading decisions"
           buttonText="Things I have done working here"
         >
-          <p>Highlights of my work in this role include:</p>
+          <h4>Data Architecture &amp; Pipelines</h4>
           <ul>
             <li>
-              Database Design &amp; Architecture: Designed and implemented normalized relational schemas (3NF) to support
-              data ingestion, improving scalability
+              Designed and implemented normalized relational schemas (3NF) to support data ingestion, improving
+              scalability.
             </li>
             <li>
-              Automation &amp; Monitoring Systems: Designed and developed an end-to-end monitoring application that tracks
-              files, APIs, and application states to ensure continuous data and system integrity. Integrated automated
-              incident creation and alerting workflows with SNow to proactively identify and resolve update or availability
-              failures.
+              Engineered a modular, event-driven pipeline connecting Bloomberg API &rarr; validation &rarr; normalized
+              data store &rarr; analytics computation &rarr; frontend visualization. Applied separation of concerns to
+              enable CI/CD integration and future extensibility.
             </li>
+          </ul>
+          <h4>Automation &amp; Monitoring</h4>
+          <ul>
             <li>
-              Pipeline Architecture: Engineered a modular, event-driven pipeline connecting Bloomberg API &rarr; validation
-              &rarr; normalized data store &rarr; analytics computation &rarr; frontend visualization. Applied separation of
-              concerns to enable CI/CD integration and future extensibility.
+              Designed and developed an end-to-end monitoring application that tracks files, APIs, and application states
+              to ensure continuous data and system integrity. Integrated automated incident creation and alerting
+              workflows with SNow to proactively identify and resolve update or availability failures.
             </li>
+          </ul>
+          <h4>Analytics &amp; Trading Models</h4>
+          <ul>
             <li>
-              Backend Development: Designed and implemented modular Python systems for analytics and data quality checks.
-              Developed analytics modules for different trading strategies.
+              Designed and implemented modular Python systems for analytics and data quality checks. Developed analytics
+              modules for different trading strategies.
             </li>
             <li>
               Designed and implemented bond spread and OIS-linked fixed-income trading strategy models, leveraging
-              historical curve behaviour, free-float metrics, credit percentile projections, and regime-segmented regression
-              analysis to evaluate relative-value opportunities in rates markets.
+              historical curve behaviour, free-float metrics, credit percentile projections, and regime-segmented
+              regression analysis to evaluate relative-value opportunities in rates markets.
             </li>
-            <li>Frontend Development: Developed Streamlit dashboards for stakeholders to take insight from for trading decisions</li>
           </ul>
+          <h4>Frontend &amp; Visualization</h4>
+          <ul>
+            <li>Developed Streamlit dashboards for stakeholders to take insight from for trading decisions.</li>
+          </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">Python</span>
+            <span className="project-tag">SQL</span>
+            <span className="project-tag">Bloomberg API</span>
+            <span className="project-tag">Streamlit</span>
+            <span className="project-tag">ServiceNow</span>
+          </div>
         </ExpandableItem>
 
         <ExpandableItem
@@ -439,28 +476,27 @@ function ExperiencePage() {
           summary="Responsible for the automation of Kubernetes cluster healthchecks and updates on the OpenShift platform via AWX"
           buttonText="Things I have done working here"
         >
-          <p>Highlights of my work in this role include:</p>
+          <h4>Kubernetes &amp; Infrastructure</h4>
           <ul>
             <li>
-              Automated Kubernetes cluster health checks and updates on the OpenShift platform via AWX, leveraging Ansible
-              for streamlined operations.
+              Automated Kubernetes cluster health checks and updates on the OpenShift platform via AWX, leveraging
+              Ansible for streamlined operations.
             </li>
             <li>Built and managed Kubernetes clusters on OpenShift with a focus on scalability and efficiency.</li>
             <li>
-              Managed CI/CD pipelines, configuring and maintaining automated build, test, and deployment workflows to ensure
-              faster and more reliable software delivery.
+              Performed Linux administration to handle system configurations, performance monitoring, and troubleshooting
+              for robust and stable infrastructure environments.
+            </li>
+          </ul>
+          <h4>Automation &amp; CI/CD</h4>
+          <ul>
+            <li>
+              Managed CI/CD pipelines, configuring and maintaining automated build, test, and deployment workflows to
+              ensure faster and more reliable software delivery.
             </li>
             <li>
               Developed advanced automation tools using AWX and Ansible to streamline cluster health monitoring, updates,
               and maintenance tasks, improving operational reliability and reducing manual intervention.
-            </li>
-            <li>
-              Configured Certificate Authority (CA) integrations to securely log into clusters using SSL, ensuring secure
-              access and communication.
-            </li>
-            <li>
-              Performed Linux administration to handle system configurations, performance monitoring, and troubleshooting
-              for robust and stable infrastructure environments.
             </li>
             <li>
               Created and optimized shell scripts for process automation, cluster management, log analysis, and task
@@ -470,8 +506,30 @@ function ExperiencePage() {
               Developed playbooks to prompt for variables and credentials for secure deployments, integrating dynamic
               configurations for efficient AWX job templates.
             </li>
-            <li>Maintained repository synchronization, branch management, and GitOps workflows for infrastructure as code practices.</li>
           </ul>
+          <h4>Security &amp; GitOps</h4>
+          <ul>
+            <li>
+              Configured Certificate Authority (CA) integrations to securely log into clusters using SSL, ensuring
+              secure access and communication.
+            </li>
+            <li>
+              Maintained repository synchronization, branch management, and GitOps workflows for infrastructure as code
+              practices.
+            </li>
+          </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">Kubernetes</span>
+            <span className="project-tag">OpenShift</span>
+            <span className="project-tag">AWX</span>
+            <span className="project-tag">Ansible</span>
+            <span className="project-tag">CI/CD</span>
+            <span className="project-tag">Shell Scripting</span>
+            <span className="project-tag">Git</span>
+            <span className="project-tag">Linux</span>
+            <span className="project-tag">SSL / CA</span>
+          </div>
         </ExpandableItem>
 
         <ExpandableItem
@@ -480,26 +538,38 @@ function ExperiencePage() {
           summary="Created an SRE application in ServiceNow to reduce toil in the Service Management space"
           buttonText="Things I have done working here"
         >
-          <p>Highlights of my work in this role include:</p>
+          <h4>Responsibilities</h4>
           <ul>
             <li>
               Developed a centralized form in ServiceNow for submitting artifact details, eliminating manual email
               submissions. The form features interactive fields, mandatory inputs, and tooltips for user guidance.
             </li>
             <li>
-              Automated the updating of description fields based on submitted artifacts, linked to JIRA IDs/change numbers,
-              and ensured proper documentation via JavaScript in ServiceNow.
+              Automated the updating of description fields based on submitted artifacts, linked to JIRA IDs/change
+              numbers, and ensured proper documentation via JavaScript in ServiceNow.
             </li>
             <li>
               Implemented automatic communication emails to stakeholders upon request resolution, formatted appropriately
               using JavaScript in ServiceNow.
             </li>
             <li>
-              Enhanced user experience and workflow efficiency by integrating UI policies, client scripts, server scripts,
-              business rules, variable sets, flows, and script actions using ServiceNow Studio tools and Flow Designer.
+              Enhanced user experience and workflow efficiency by integrating UI policies, client scripts, server
+              scripts, business rules, variable sets, flows, and script actions using ServiceNow Studio tools and Flow
+              Designer.
             </li>
-            <li>Published multiple documentations on Confluence detailing ServiceNow development processes and application functionalities.</li>
+            <li>
+              Published multiple documentations on Confluence detailing ServiceNow development processes and application
+              functionalities.
+            </li>
           </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">ServiceNow</span>
+            <span className="project-tag">JavaScript</span>
+            <span className="project-tag">Flow Designer</span>
+            <span className="project-tag">JIRA</span>
+            <span className="project-tag">Confluence</span>
+          </div>
         </ExpandableItem>
 
         <ExpandableItem
@@ -508,22 +578,29 @@ function ExperiencePage() {
           summary="The Youth Network (TYN) at Westpac Group is an Employee Action Group supporting employees aged 35 and under, focused on fostering personal and professional growth through networking events, mentoring programs, and development opportunities. It aims to empower young professionals, nurture future leaders, and encourage intergenerational collaboration within the organization."
           buttonText="Things I have done working here"
         >
-          <p>Highlights of my work in this role include:</p>
+          <h4>Responsibilities</h4>
           <ul>
             <li>
-              Mastered Microsoft Power Automate (MPA) to create workflow bots on Teams and email, enhancing social morale
-              and productivity.
+              Mastered Microsoft Power Automate (MPA) to create workflow bots on Teams and email, enhancing social
+              morale and productivity.
             </li>
             <li>
               Developed a task tracker tool for TYN, integrating Trello with Outlook calendar via MPA. Automated task
-              assignments, due dates, and descriptions based on calendar entries, with seamless integration into Microsoft
-              Teams.
+              assignments, due dates, and descriptions based on calendar entries, with seamless integration into
+              Microsoft Teams.
             </li>
             <li>
-              Showcased and enhanced public speaking skills during the TYN vs. Execs debate on &quot;Will AI Replace Executive
-              Jobs?&quot; as the first speaker for the negative team.
+              Showcased and enhanced public speaking skills during the TYN vs. Execs debate on &quot;Will AI Replace
+              Executive Jobs?&quot; as the first speaker for the negative team.
             </li>
           </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">Microsoft Power Automate</span>
+            <span className="project-tag">Trello</span>
+            <span className="project-tag">Microsoft Teams</span>
+            <span className="project-tag">Outlook Calendar</span>
+          </div>
         </ExpandableItem>
       </div>
     </section>
