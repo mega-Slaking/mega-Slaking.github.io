@@ -312,6 +312,10 @@ section {
   padding-left: 24px;
 }
 
+.project-grid .hidden-content li + li {
+  margin-top: 10px;
+}
+
 .hidden-content h4 {
   font-size: 16px;
   font-weight: normal;

@@ -639,7 +639,7 @@ function ContactSection() {
     <section id="contact">
       <h2>Contact</h2>
       <p>
-        Email: <a href="mailto:kish.kharka@westpac.com.au">kish.kharka@westpac.com.au</a>
+        Email: <a href="mailto:parmanandkharka@protonmail.com">parmanandkharka@protonmail.com</a>
       </p>
     </section>
   );
