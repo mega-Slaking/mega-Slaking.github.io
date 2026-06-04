@@ -146,6 +146,7 @@ function ProjectsPage() {
           summary="A modular quantitative research and backtesting platform for testing systematic bond ETF allocation strategies using macro regimes, price signals, volatility/covariance models, scenario factories, SQLite persistence, and Streamlit analytics dashboards."
           buttonText="More details"
         >
+          <h4>Overview</h4>
           <p>
             Built a modular quantitative research platform for testing systematic asset-allocation strategies across bond
             ETFs, macroeconomic regimes, volatility models, and portfolio construction rules. The platform ingests market
@@ -153,7 +154,7 @@ function ProjectsPage() {
             allocation decisions, applies risk-aware sizing and constraints, persists scenario results to SQLite, and
             surfaces performance analytics through a Streamlit dashboard.
           </p>
-          <p>Highlights of this project include:</p>
+          <h4>Key Highlights</h4>
           <ul>
             <li>
               Built a modular Python research platform for systematic asset-allocation experiments across bond ETFs
@@ -184,13 +185,23 @@ function ProjectsPage() {
               Refactored macro data handling to store raw FRED series only while computing derived features such as
               inflation direction, yield curve, labour weakness, and growth signals at runtime.
             </li>
-            <li>
-              View the publicly available code and README:{' '}
-              <a href="https://github.com/mega-Slaking/systematic_trading_model" target="_blank" rel="noreferrer">
-                https://github.com/mega-Slaking/systematic_trading_model
-              </a>
-            </li>
           </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">Python</span>
+            <span className="project-tag">SQLite</span>
+            <span className="project-tag">Streamlit</span>
+            <span className="project-tag">C++ / pybind11</span>
+            <span className="project-tag">EWMA</span>
+            <span className="project-tag">GARCH</span>
+            <span className="project-tag">FRED</span>
+          </div>
+          <h4>Source Code</h4>
+          <div className="project-links">
+            <a href="https://github.com/mega-Slaking/systematic_trading_model" target="_blank" rel="noreferrer">
+              Publicly available code and README — github.com/mega-Slaking/systematic_trading_model
+            </a>
+          </div>
         </ExpandableItem>
 
         <ExpandableItem
@@ -199,10 +210,11 @@ function ProjectsPage() {
           summary="Computational Modelling of the effects of Oriented External Electric Fields on Glycine"
           buttonText="View More Details"
         >
+          <h4>Overview</h4>
           <p>
-            The project focused on simulating the behavior of glycine molecules under varying external electric fields. Key
-            highlights include:
+            The project focused on simulating the behavior of glycine molecules under varying external electric fields.
           </p>
+          <h4>Key Highlights</h4>
           <ul>
             <li>
               Developed a three-dimensional model to map glycine&apos;s potential energy surface by varying dihedral angles,
@@ -226,17 +238,16 @@ function ProjectsPage() {
             </li>
             <li>
               Validated the model by accurately predicting glycine&apos;s behavior in biologically relevant environments,
-              such as water, as seen in the gif below.
-            </li>
-            <li>
-              Check this file out{' '}
-              <a href={thesisPdf} target="_blank" rel="noreferrer">
-                here
-              </a>{' '}
-              to view the methods used to create these predictive models.
+              such as water, as seen in the visualisations below.
             </li>
           </ul>
-
+          <h4>Thesis Document</h4>
+          <div className="project-links">
+            <a href={thesisPdf} target="_blank" rel="noreferrer">
+              Check this file out here — view the methods used to create these predictive models.
+            </a>
+          </div>
+          <h4>Visualisations</h4>
           <div className="project-media-grid">
             <img src={yFieldGif} alt="Application of y-electric field" className="project-gif" />
             <img src={xFieldGif} alt="Application of x-electric field" className="project-gif" />
@@ -252,25 +263,31 @@ function ProjectsPage() {
           summary="Worked together in an interdisciplinary team to provide a solution for Cartier&apos;s boutique zoning traffic"
           buttonText="More details"
         >
-          <p>Highlights of my work in this role include:</p>
+          <h4>Key Highlights</h4>
           <ul>
             <li>
-              Data Analysis and Insights: Analyzed customer engagement data using Pandas and Matplotlib to investigate
+              <strong>Data Analysis and Insights:</strong> Analyzed customer engagement data using Pandas and Matplotlib to investigate
               inconsistencies between Cartier&apos;s online and in-store traffic trends.
             </li>
             <li>
-              Data Visualization: Created visual models to highlight key discrepancies, revealing that in-store jewelry zones
+              <strong>Data Visualization:</strong> Created visual models to highlight key discrepancies, revealing that in-store jewelry zones
               had significantly higher traffic, while online data indicated watches as the most viewed category.
             </li>
             <li>
-              Problem Identification: Identified a disconnect between online engagement trends and in-store customer behavior,
+              <strong>Problem Identification:</strong> Identified a disconnect between online engagement trends and in-store customer behavior,
               providing actionable insights for boutique traffic management.
             </li>
             <li>
-              Data-Driven Recommendations: Leveraged insights and research on the psychology of zoning to propose boutique
+              <strong>Data-Driven Recommendations:</strong> Leveraged insights and research on the psychology of zoning to propose boutique
               rezoning strategies aimed at optimizing customer flow and increasing engagement with key product categories.
             </li>
           </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">Python</span>
+            <span className="project-tag">Pandas</span>
+            <span className="project-tag">Matplotlib</span>
+          </div>
         </ExpandableItem>
 
         <ExpandableItem
@@ -279,10 +296,12 @@ function ProjectsPage() {
           summary="A Raspberry Pi-hosted AI development orchestrator that lets me trigger Claude/OpenClaw coding tasks from Telegram, automatically create PRs from safe feature branches, run validation checks, and preview frontend changes privately over Tailscale before merging."
           buttonText="More details"
         >
+          <h4>Overview</h4>
           <p>
             Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub,
-            Claude Code, OpenClaw, and custom Python/Bash orchestration scripts. Highlights include:
+            Claude Code, OpenClaw, and custom Python/Bash orchestration scripts.
           </p>
+          <h4>Key Highlights</h4>
           <ul>
             <li>
               Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude
@@ -306,6 +325,17 @@ function ProjectsPage() {
               execution.
             </li>
           </ul>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            <span className="project-tag">Raspberry Pi</span>
+            <span className="project-tag">Python</span>
+            <span className="project-tag">Bash</span>
+            <span className="project-tag">Telegram</span>
+            <span className="project-tag">Tailscale</span>
+            <span className="project-tag">GitHub</span>
+            <span className="project-tag">Claude Code</span>
+            <span className="project-tag">OpenClaw</span>
+          </div>
         </ExpandableItem>
       </div>
     </section>
