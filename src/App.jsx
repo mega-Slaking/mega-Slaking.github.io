@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { ShatterCard } from './ShatterCard.jsx';
 
 import profileImage from '../profile.jpg';
@@ -99,13 +99,71 @@ function HomePage() {
       <AboutSection />
       <section id="projects">
         <h2>Projects and Experience</h2>
-        <div className="section-picker" aria-label="Projects and experience navigation">
-          <ShatterCard label="Projects" href="#/projects" />
-          <ShatterCard label="Experience" href="#/experience" />
-        </div>
+        <CarouselPicker />
       </section>
       <ContactSection />
     </>
+  );
+}
+
+const NAV_ITEMS = [
+  { label: 'Projects', href: '#/projects' },
+  { label: 'Experience', href: '#/experience' },
+];
+
+function CarouselPicker() {
+  const [selected, setSelected] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const timerRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  const doSwitch = () => {
+    if (animating) return;
+    setAnimating(true);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setSelected(s => 1 - s);
+      setAnimating(false);
+    }, 560);
+  };
+
+  const getSlotClass = (idx) => {
+    const isSelected = idx === selected;
+    if (isSelected && !animating) return 'carousel-slot--central';
+    if (!isSelected && !animating) return selected === 0 ? 'carousel-slot--right' : 'carousel-slot--left';
+    if (isSelected && animating) return selected === 0 ? 'carousel-slot--left' : 'carousel-slot--right';
+    return 'carousel-slot--central'; // !isSelected && animating: entering center
+  };
+
+  return (
+    <div className="carousel-picker" role="group" aria-label="Projects and experience navigation">
+      <button
+        className="carousel-arrow"
+        onClick={doSwitch}
+        aria-label="Previous"
+        disabled={animating}
+        type="button"
+      >
+        ‹
+      </button>
+      <div className="carousel-track">
+        {NAV_ITEMS.map((item, idx) => (
+          <div key={item.label} className={`carousel-slot ${getSlotClass(idx)}`}>
+            <ShatterCard label={item.label} href={item.href} />
+          </div>
+        ))}
+      </div>
+      <button
+        className="carousel-arrow"
+        onClick={doSwitch}
+        aria-label="Next"
+        disabled={animating}
+        type="button"
+      >
+        ›
+      </button>
+    </div>
   );
 }
 

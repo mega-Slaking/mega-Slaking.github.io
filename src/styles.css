@@ -68,6 +68,103 @@ header nav a:hover {
   margin: 20px 0;
 }
 
+/* ===== Carousel Picker ===== */
+
+.carousel-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.carousel-track {
+  position: relative;
+  flex: 1;
+  height: 220px;
+  perspective: 900px;
+}
+
+.carousel-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 340px;
+  transition:
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.55s ease,
+    filter 0.55s ease;
+}
+
+.carousel-slot--central {
+  transform: translate(-50%, -50%) rotateY(0deg) scale(1);
+  opacity: 1;
+  filter: brightness(1);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.carousel-slot--central .shatter-card {
+  min-height: 200px;
+  box-shadow:
+    0 0 28px rgba(0, 255, 255, 0.28),
+    0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.carousel-slot--right {
+  transform: translate(calc(-50% + 260px), -50%) rotateY(-22deg) scale(0.62);
+  opacity: 0.38;
+  filter: brightness(0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.carousel-slot--left {
+  transform: translate(calc(-50% - 260px), -50%) rotateY(22deg) scale(0.62);
+  opacity: 0.38;
+  filter: brightness(0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 255, 255, 0.07);
+  border: 1px solid rgba(153, 255, 255, 0.28);
+  border-radius: 50%;
+  color: #99FFFF;
+  font-size: 30px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Iceland', sans-serif;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  z-index: 3;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+  background: rgba(0, 255, 255, 0.18);
+  border-color: rgba(153, 255, 255, 0.6);
+  color: #0ff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carousel-arrow:focus-visible {
+  outline: 2px solid rgba(0, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+/* ========================= */
+
 .section-card {
   display: flex;
   min-height: 180px;
@@ -411,6 +508,28 @@ footer {
 
   .section-picker {
     grid-template-columns: 1fr;
+  }
+
+  .carousel-track {
+    height: 200px;
+  }
+
+  .carousel-slot {
+    width: 240px;
+  }
+
+  .carousel-slot--right {
+    transform: translate(calc(-50% + 165px), -50%) rotateY(0deg) scale(0.55);
+  }
+
+  .carousel-slot--left {
+    transform: translate(calc(-50% - 165px), -50%) rotateY(0deg) scale(0.55);
+  }
+
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
   }
 
   .timeline {
