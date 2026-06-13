@@ -209,6 +209,13 @@ header nav a:hover {
   align-items: start;
 }
 
+.blog-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
 .timeline {
   position: relative;
   display: grid;
