@@ -123,6 +123,7 @@ function CarouselPicker() {
   const [animating, setAnimating] = useState(false);
   const [direction, setDirection] = useState(1);
   const timerRef = useRef(null);
+  const touchStartRef = useRef(null);
   const n = NAV_ITEMS.length;
 
   useEffect(() => () => clearTimeout(timerRef.current), []);
@@ -151,6 +152,22 @@ function CarouselPicker() {
     return 'carousel-slot--left';
   };
 
+  const handleTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartRef.current = { x: t.clientX, y: t.clientY };
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStartRef.current) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartRef.current.x;
+    const dy = t.clientY - touchStartRef.current.y;
+    touchStartRef.current = null;
+    // Require horizontal movement to dominate and exceed threshold
+    if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+    doSwitch(dx < 0 ? 1 : -1);
+  };
+
   return (
     <div className="carousel-picker" role="group" aria-label="Projects, experience, and blog navigation">
       <button
@@ -162,7 +179,11 @@ function CarouselPicker() {
       >
         ‹
       </button>
-      <div className="carousel-track">
+      <div
+        className="carousel-track"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         {NAV_ITEMS.map((item, idx) => (
           <div key={item.label} className={`carousel-slot ${getSlotClass(idx)}`}>
             <ShatterCard label={item.label} href={item.href} />
