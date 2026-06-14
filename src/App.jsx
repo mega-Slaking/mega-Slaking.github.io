@@ -11,17 +11,12 @@ import waterGif from '../gifs/yes.gif';
 import PixelClickEffect from './PixelClickEffect.jsx';
 
 function getRoute() {
-  if (window.location.hash === '#/projects') {
-    return 'projects';
-  }
+  const hash = window.location.hash;
 
-  if (window.location.hash === '#/experience') {
-    return 'experience';
-  }
-
-  if (window.location.hash === '#/blog') {
-    return 'blog';
-  }
+  if (hash === '#/projects') return 'projects';
+  if (hash === '#/experience') return 'experience';
+  if (hash === '#/blog') return 'blog';
+  if (hash.startsWith('#/blog/')) return `blog-post:${hash.slice(7)}`;
 
   return 'home';
 }
@@ -78,6 +73,7 @@ function App() {
       {route === 'projects' ? <ProjectsPage /> : null}
       {route === 'experience' ? <ExperiencePage /> : null}
       {route === 'blog' ? <BlogPage /> : null}
+      {route.startsWith('blog-post:') ? <BlogPostPage slug={route.slice(10)} /> : null}
       {route === 'home' ? <HomePage /> : null}
       <Footer />
     </>
@@ -763,24 +759,60 @@ function BlogPage() {
       <h2>Blog</h2>
       <div className="blog-list">
         {BLOG_POSTS.map((post) => (
-          <ExpandableItem
-            key={post.slug}
-            variant="blog"
-            title={post.title}
-            summary={`${post.date} — ${post.summary}`}
-            buttonText="Read post"
-          >
-            {post.body.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
-            <div className="project-tags">
-              {post.tags.map((tag) => (
-                <span key={tag} className="project-tag">{tag}</span>
-              ))}
-            </div>
-          </ExpandableItem>
+          <a key={post.slug} href={`#/blog/${post.slug}`} className="blog-index-card" aria-label={`Read: ${post.title}`}>
+            <h3 className="blog-index-card__title">{post.title}</h3>
+            <p className="blog-index-card__meta">{post.date}</p>
+            <p className="blog-index-card__summary">{post.summary}</p>
+            {post.tags && (
+              <div className="project-tags">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="project-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
         ))}
       </div>
+    </section>
+  );
+}
+
+function BlogPostPage({ slug }) {
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+
+  if (!post) {
+    return (
+      <section id="blog-post-page" className="content-page">
+        <div className="page-actions">
+          <a href="#/blog">← Back to Blog</a>
+        </div>
+        <p>Post not found.</p>
+      </section>
+    );
+  }
+
+  return (
+    <section id="blog-post-page" className="content-page">
+      <div className="page-actions">
+        <a href="#/blog">← Back to Blog</a>
+      </div>
+      <article className="blog-post">
+        <h2>{post.title}</h2>
+        <p className="blog-post__date">{post.date}</p>
+        <p className="blog-post__summary">{post.summary}</p>
+        <div className="blog-post__body">
+          {post.body.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
+        {post.tags && (
+          <div className="project-tags">
+            {post.tags.map((tag) => (
+              <span key={tag} className="project-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </article>
     </section>
   );
 }
