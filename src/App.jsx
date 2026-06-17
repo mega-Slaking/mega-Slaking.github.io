@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { ShatterCard } from './ShatterCard.jsx';
 
 import profileImage from '../profile.jpg';
@@ -11,13 +11,12 @@ import waterGif from '../gifs/yes.gif';
 import PixelClickEffect from './PixelClickEffect.jsx';
 
 function getRoute() {
-  if (window.location.hash === '#/projects') {
-    return 'projects';
-  }
+  const hash = window.location.hash;
 
-  if (window.location.hash === '#/experience') {
-    return 'experience';
-  }
+  if (hash === '#/projects') return 'projects';
+  if (hash === '#/experience') return 'experience';
+  if (hash === '#/blog') return 'blog';
+  if (hash.startsWith('#/blog/')) return `blog-post:${hash.slice(7)}`;
 
   return 'home';
 }
@@ -73,6 +72,8 @@ function App() {
       <Header />
       {route === 'projects' ? <ProjectsPage /> : null}
       {route === 'experience' ? <ExperiencePage /> : null}
+      {route === 'blog' ? <BlogPage /> : null}
+      {route.startsWith('blog-post:') ? <BlogPostPage slug={route.slice(10)} /> : null}
       {route === 'home' ? <HomePage /> : null}
       <Footer />
     </>
@@ -87,6 +88,7 @@ function Header() {
         <a href="#about">About</a>
         <a href="#/projects">Projects</a>
         <a href="#/experience">Experience</a>
+        <a href="#/blog">Blog</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -98,14 +100,102 @@ function HomePage() {
     <>
       <AboutSection />
       <section id="projects">
-        <h2>Projects and Experience</h2>
-        <div className="section-picker" aria-label="Projects and experience navigation">
-          <ShatterCard label="Projects" href="#/projects" />
-          <ShatterCard label="Experience" href="#/experience" />
-        </div>
+        <h2>Projects, Experience and Blog</h2>
+        <CarouselPicker />
       </section>
       <ContactSection />
     </>
+  );
+}
+
+const NAV_ITEMS = [
+  { label: 'Projects', href: '#/projects' },
+  { label: 'Experience', href: '#/experience' },
+  { label: 'Blog', href: '#/blog' },
+];
+
+function CarouselPicker() {
+  const [selected, setSelected] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState(1);
+  const timerRef = useRef(null);
+  const touchStartRef = useRef(null);
+  const n = NAV_ITEMS.length;
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  const doSwitch = (dir) => {
+    if (animating) return;
+    setDirection(dir);
+    setAnimating(true);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setSelected(s => (s + dir + n) % n);
+      setAnimating(false);
+    }, 560);
+  };
+
+  const getSlotClass = (idx) => {
+    if (!animating) {
+      if (idx === selected) return 'carousel-slot--central';
+      if (idx === (selected + 1) % n) return 'carousel-slot--right';
+      return 'carousel-slot--left';
+    }
+    // During animation: show items at their destination positions
+    const next = (selected + direction + n) % n;
+    if (idx === next) return 'carousel-slot--central';
+    if (idx === (next + 1) % n) return 'carousel-slot--right';
+    return 'carousel-slot--left';
+  };
+
+  const handleTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartRef.current = { x: t.clientX, y: t.clientY };
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStartRef.current) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartRef.current.x;
+    const dy = t.clientY - touchStartRef.current.y;
+    touchStartRef.current = null;
+    // Require horizontal movement to dominate and exceed threshold
+    if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+    doSwitch(dx < 0 ? 1 : -1);
+  };
+
+  return (
+    <div className="carousel-picker" role="group" aria-label="Projects, experience, and blog navigation">
+      <button
+        className="carousel-arrow"
+        onClick={() => doSwitch(-1)}
+        aria-label="Previous"
+        disabled={animating}
+        type="button"
+      >
+        ‹
+      </button>
+      <div
+        className="carousel-track"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {NAV_ITEMS.map((item, idx) => (
+          <div key={item.label} className={`carousel-slot ${getSlotClass(idx)}`}>
+            <ShatterCard label={item.label} href={item.href} />
+          </div>
+        ))}
+      </div>
+      <button
+        className="carousel-arrow"
+        onClick={() => doSwitch(1)}
+        aria-label="Next"
+        disabled={animating}
+        type="button"
+      >
+        ›
+      </button>
+    </div>
   );
 }
 
@@ -638,6 +728,91 @@ function ExperiencePage() {
           </div>
         </ExpandableItem>
       </div>
+    </section>
+  );
+}
+
+const BLOG_POSTS = [
+  {
+    slug: 'phone-first-ai-workflow',
+    title: 'Building a Phone-First AI Development Workflow',
+    date: 'June 2026',
+    summary: 'How I combined a Raspberry Pi, Telegram, Tailscale, Claude Code, OpenClaw, Python, Bash, and GitHub pull requests to create a private AI-assisted development workflow that I can use from my phone.',
+    tags: ['Raspberry Pi', 'AI-Assisted Engineering', 'Telegram', 'Tailscale', 'Claude Code', 'OpenClaw', 'Python', 'Bash', 'GitHub Automation'],
+    body: [
+      'I wanted a development workflow that was available even when I was away from my laptop. The result was a Raspberry Pi-based orchestration system that acts as an always-on remote execution environment.',
+      'Telegram provides the command interface. From my phone, I can trigger scoped AI-assisted coding tasks, create safe feature branches, run repository-specific validation commands, open pull requests, and start private frontend previews.',
+      'Python and Bash scripts form the automation backbone. Claude Code and OpenClaw perform scoped code changes, while the orchestration layer controls branch creation, testing, commits, pushes, and pull request creation. This separation keeps the AI worker focused on implementation while the surrounding system enforces the workflow.',
+      'Tailscale provides a private network between my phone and the Raspberry Pi. This lets me open Vite/React branch previews without exposing development servers to the public internet.',
+      'GitHub pull requests remain the final review boundary. AI can generate and iterate on changes, but I still inspect the diff, test the result, and decide whether to merge or reject the work.',
+      'The project started as a convenient way to make portfolio UI changes remotely, but it has developed into a broader experiment in controlled AI-assisted engineering, mobile-first development, and human-in-the-loop automation.',
+    ],
+  },
+];
+
+function BlogPage() {
+  return (
+    <section id="blog-page" className="content-page">
+      <div className="page-actions">
+        <a href="#projects">Back to Projects and Experience</a>
+      </div>
+      <h2>Blog</h2>
+      <div className="blog-list">
+        {BLOG_POSTS.map((post) => (
+          <a key={post.slug} href={`#/blog/${post.slug}`} className="blog-index-card" aria-label={`Read: ${post.title}`}>
+            <h3 className="blog-index-card__title">{post.title}</h3>
+            <p className="blog-index-card__meta">{post.date}</p>
+            <p className="blog-index-card__summary">{post.summary}</p>
+            {post.tags && (
+              <div className="project-tags">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="project-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BlogPostPage({ slug }) {
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+
+  if (!post) {
+    return (
+      <section id="blog-post-page" className="content-page">
+        <div className="page-actions">
+          <a href="#/blog">← Back to Blog</a>
+        </div>
+        <p>Post not found.</p>
+      </section>
+    );
+  }
+
+  return (
+    <section id="blog-post-page" className="content-page">
+      <div className="page-actions">
+        <a href="#/blog">← Back to Blog</a>
+      </div>
+      <article className="blog-post">
+        <h2>{post.title}</h2>
+        <p className="blog-post__date">{post.date}</p>
+        <p className="blog-post__summary">{post.summary}</p>
+        <div className="blog-post__body">
+          {post.body.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
+        {post.tags && (
+          <div className="project-tags">
+            {post.tags.map((tag) => (
+              <span key={tag} className="project-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </article>
     </section>
   );
 }
