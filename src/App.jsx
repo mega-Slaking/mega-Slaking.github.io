@@ -734,6 +734,14 @@ function ExperiencePage() {
 
 const BLOG_POSTS = [
   {
+    slug: 'trading-engine',
+    title: 'trading engine',
+    date: 'June 2026',
+    summary: '',
+    tags: [],
+    body: [],
+  },
+  {
     slug: 'phone-first-ai-workflow',
     title: 'Building a Phone-First AI Development Workflow',
     date: 'June 2026',
