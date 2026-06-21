@@ -742,6 +742,14 @@ const BLOG_POSTS = [
     body: [],
   },
   {
+    slug: 'honours-thesis',
+    title: 'Honours Thesis',
+    date: 'June 2026',
+    summary: '',
+    tags: [],
+    body: [],
+  },
+  {
     slug: 'phone-first-ai-workflow',
     title: 'Building a Phone-First AI Development Workflow',
     date: 'June 2026',
