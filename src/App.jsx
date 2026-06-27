@@ -196,247 +196,262 @@ function AboutSection() {
   );
 }
 
+// Projects render as uniform preview cards; clicking one swaps the grid for an
+// in-page detail view via local state (no routing) so navigation stays self-
+// contained. A highlight may be a plain string or a { term, text } labelled point.
+const PROJECTS = [
+  {
+    slug: 'systematic-trading-platform',
+    title: 'Systematic Quantitative Research & Backtesting Platform',
+    flagship: true,
+    category: 'Quantitative Research',
+    year: '',
+    impact:
+      'A modular Python research and backtesting platform for systematic bond-ETF allocation across macro regimes, volatility/covariance models, and risk-aware portfolio construction.',
+    tags: ['Python', 'SQLite', 'Streamlit', 'C++ / pybind11', 'EWMA', 'GARCH', 'FRED'],
+    overview:
+      'Built a modular quantitative research platform for testing systematic asset-allocation strategies across bond ETFs, macroeconomic regimes, volatility models, and portfolio construction rules. The platform ingests market and macroeconomic data, computes price and macro signals, classifies economic/monetary regimes, generates allocation decisions, applies risk-aware sizing and constraints, persists scenario results to SQLite, and surfaces performance analytics through a Streamlit dashboard.',
+    highlights: [
+      'Built a modular Python research platform for systematic asset-allocation experiments across bond ETFs including TLT, AGG, and SHY.',
+      'Designed a decision-centric strategy pipeline covering macro/price signal generation, regime classification, base allocation, volatility-aware position sizing, portfolio constraints, and final allocation tracing.',
+      'Implemented scenario factories to compare strategy variants across EWMA/GARCH volatility models, sample/EWMA covariance scaling, conviction scaling, and portfolio volatility targeting.',
+      'Persisted backtest results, decision traces, costs, turnover, NAV, and scenario metadata into SQLite for reproducible experiment tracking.',
+      'Built Streamlit dashboards and tearsheet analytics for NAV comparison, return analysis, drawdowns, Sharpe/Sortino/Calmar, VaR/CVaR, turnover, cost drag, and ETF price inspection.',
+      'Optimized expensive covariance calculations using C++/pybind11 integration, precomputed return views, and caching to improve scenario-testing performance.',
+      'Refactored macro data handling to store raw FRED series only while computing derived features such as inflation direction, yield curve, labour weakness, and growth signals at runtime.',
+    ],
+    media: [],
+    links: [
+      {
+        label: 'Source code & README — github.com/mega-Slaking/systematic_trading_model',
+        href: 'https://github.com/mega-Slaking/systematic_trading_model',
+      },
+    ],
+  },
+  {
+    slug: 'honours-thesis',
+    title: 'Honours Thesis',
+    flagship: false,
+    category: 'Computational Chemistry',
+    year: '',
+    impact:
+      "Computational modelling of the effects of oriented external electric fields on glycine — including the first full 24-dimensional potential-energy model for a molecule larger than three atoms.",
+    tags: ['Python', 'Shepard Interpolation', 'Potential Energy Surfaces', 'Rotation Matrices'],
+    overview: 'The project focused on simulating the behavior of glycine molecules under varying external electric fields.',
+    highlights: [
+      "Developed a three-dimensional model to map glycine's potential energy surface by varying dihedral angles, forming the foundation for advanced predictive modeling.",
+      'Investigated and applied modified Shepard interpolation methods, leveraging first and second-order derivatives to enhance predictive accuracy and enable model extrapolation.',
+      'Created and implemented rotation matrices for precise data transformation and molecular orientation in computational simulations.',
+      "Modeled glycine's interactions under varying electric fields (x, y, z) to characterize enzyme binding and structural changes, leveraging computational data analysis techniques.",
+      'Engineered the first full-dimensional (24-dimensional) data model for a molecule larger than three atoms, showcasing innovation in high-dimensional modeling.',
+      "Validated the model by accurately predicting glycine's behavior in biologically relevant environments, such as water, as seen in the visualisations below.",
+    ],
+    media: [
+      { src: yFieldGif, alt: 'Application of y-electric field' },
+      { src: xFieldGif, alt: 'Application of x-electric field' },
+      { src: zFieldGif, alt: 'Application of z-electric field' },
+      { src: yzFieldGif, alt: 'Application of yz-electric field' },
+      { src: waterGif, alt: 'Modelling Glycine in water' },
+    ],
+    links: [{ label: 'View the thesis methods (PDF)', href: thesisPdf }],
+  },
+  {
+    slug: 'cartier-data-analysis',
+    title: 'Cartier Data Analysis Project',
+    flagship: false,
+    category: 'Data Analysis',
+    year: '',
+    impact:
+      "An interdisciplinary team project analysing Cartier's online vs in-store traffic to recommend boutique re-zoning strategies that improve customer flow.",
+    tags: ['Python', 'Pandas', 'Matplotlib'],
+    overview: '',
+    highlights: [
+      {
+        term: 'Data Analysis and Insights',
+        text: "Analyzed customer engagement data using Pandas and Matplotlib to investigate inconsistencies between Cartier's online and in-store traffic trends.",
+      },
+      {
+        term: 'Data Visualization',
+        text: 'Created visual models to highlight key discrepancies, revealing that in-store jewelry zones had significantly higher traffic, while online data indicated watches as the most viewed category.',
+      },
+      {
+        term: 'Problem Identification',
+        text: 'Identified a disconnect between online engagement trends and in-store customer behavior, providing actionable insights for boutique traffic management.',
+      },
+      {
+        term: 'Data-Driven Recommendations',
+        text: 'Leveraged insights and research on the psychology of zoning to propose boutique rezoning strategies aimed at optimizing customer flow and increasing engagement with key product categories.',
+      },
+    ],
+    media: [],
+    links: [],
+  },
+  {
+    slug: 'raspberry-pi-ai-orchestrator',
+    title: 'Raspberry Pi AI-Assisted Development Orchestrator',
+    flagship: false,
+    category: 'AI Infrastructure',
+    year: '',
+    impact:
+      'A Raspberry Pi-hosted orchestrator that triggers Claude/OpenClaw coding tasks from Telegram, auto-creates PRs from safe feature branches, runs validation, and previews frontend changes privately over Tailscale.',
+    tags: ['Raspberry Pi', 'Python', 'Bash', 'Telegram', 'Tailscale', 'GitHub', 'Claude Code', 'OpenClaw'],
+    overview:
+      'Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub, Claude Code, OpenClaw, and custom Python/Bash orchestration scripts.',
+    highlights: [
+      'Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude Code, OpenClaw, Python, and Bash.',
+      'Designed a phone-first development workflow where Telegram commands trigger scoped AI coding tasks, branch creation, validation, PR generation, and private preview links.',
+      'Implemented branch safety controls including dev-branch integration, protected main/master avoidance, task-specific branch prefixes, dirty-working-tree checks, and manual PR review boundaries.',
+      'Integrated Tailscale to securely preview Vite/React frontend branches from a phone without exposing local development servers to the public internet.',
+      'Added operational safeguards including AI task kill switches, model/cost control separation, timeout handling, agent prompt guardrails, and separation between bot-owned Telegram control and agent-owned code execution.',
+    ],
+    media: [],
+    links: [{ label: 'Related write-up: Building a Phone-First AI Development Workflow', href: '#/blog/phone-first-ai-workflow' }],
+  },
+];
+
+function ProjectMeta({ project }) {
+  return (
+    <div className="project-meta">
+      {project.flagship ? <span className="project-flag">Flagship</span> : null}
+      <span className="project-category">{project.category}</span>
+      {project.year ? <span className="project-year">{project.year}</span> : null}
+    </div>
+  );
+}
+
+function ProjectHighlight({ item }) {
+  if (typeof item === 'string') {
+    return <li>{item}</li>;
+  }
+
+  return (
+    <li>
+      <strong>{item.term}:</strong> {item.text}
+    </li>
+  );
+}
+
+function ProjectDetail({ project }) {
+  return (
+    <article className="project-detail">
+      <ProjectMeta project={project} />
+      <h2>{project.title}</h2>
+      <p className="project-detail__lead">{project.impact}</p>
+
+      {project.overview ? (
+        <>
+          <h4>Overview</h4>
+          <p>{project.overview}</p>
+        </>
+      ) : null}
+
+      {project.highlights?.length ? (
+        <>
+          <h4>Key Highlights</h4>
+          <ul>
+            {project.highlights.map((item, i) => (
+              <ProjectHighlight key={i} item={item} />
+            ))}
+          </ul>
+        </>
+      ) : null}
+
+      {project.media?.length ? (
+        <>
+          <h4>Visualisations</h4>
+          <div className="project-media-grid">
+            {project.media.map((m) => (
+              <img key={m.alt} src={m.src} alt={m.alt} className="project-gif" />
+            ))}
+          </div>
+        </>
+      ) : null}
+
+      {project.tags?.length ? (
+        <>
+          <h4>Technologies</h4>
+          <div className="project-tags">
+            {project.tags.map((tag) => (
+              <span key={tag} className="project-tag">{tag}</span>
+            ))}
+          </div>
+        </>
+      ) : null}
+
+      {project.links?.length ? (
+        <>
+          <h4>Links</h4>
+          <div className="project-links">
+            {project.links.map((link) =>
+              link.href.startsWith('http') ? (
+                <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                  {link.label}
+                </a>
+              ) : (
+                <a key={link.href} href={link.href}>
+                  {link.label}
+                </a>
+              ),
+            )}
+          </div>
+        </>
+      ) : null}
+    </article>
+  );
+}
+
 function ProjectsPage() {
+  const [openSlug, setOpenSlug] = useState(null);
+  const openProject = openSlug ? PROJECTS.find((p) => p.slug === openSlug) : null;
+
+  const openDetail = (slug) => {
+    setOpenSlug(slug);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <section id="projects-page" className="content-page">
       <div className="page-actions">
-        <a href="#projects">Back to Projects and Experience</a>
+        {openProject ? (
+          <button type="button" className="project-back" onClick={() => setOpenSlug(null)}>
+            ← Back to Projects
+          </button>
+        ) : (
+          <a href="#projects">← Back to Home</a>
+        )}
       </div>
-      <h2>Projects</h2>
-      <div className="project-grid">
-        <ExpandableItem
-          variant="project"
-          title="Systematic Quantitative Research & Backtesting Platform"
-          summary="A modular quantitative research and backtesting platform for testing systematic bond ETF allocation strategies using macro regimes, price signals, volatility/covariance models, scenario factories, SQLite persistence, and Streamlit analytics dashboards."
-          buttonText="More details"
-        >
-          <h4>Overview</h4>
-          <p>
-            Built a modular quantitative research platform for testing systematic asset-allocation strategies across bond
-            ETFs, macroeconomic regimes, volatility models, and portfolio construction rules. The platform ingests market
-            and macroeconomic data, computes price and macro signals, classifies economic/monetary regimes, generates
-            allocation decisions, applies risk-aware sizing and constraints, persists scenario results to SQLite, and
-            surfaces performance analytics through a Streamlit dashboard.
-          </p>
-          <h4>Key Highlights</h4>
-          <ul>
-            <li>
-              Built a modular Python research platform for systematic asset-allocation experiments across bond ETFs
-              including TLT, AGG, and SHY.
-            </li>
-            <li>
-              Designed a decision-centric strategy pipeline covering macro/price signal generation, regime
-              classification, base allocation, volatility-aware position sizing, portfolio constraints, and final
-              allocation tracing.
-            </li>
-            <li>
-              Implemented scenario factories to compare strategy variants across EWMA/GARCH volatility models,
-              sample/EWMA covariance scaling, conviction scaling, and portfolio volatility targeting.
-            </li>
-            <li>
-              Persisted backtest results, decision traces, costs, turnover, NAV, and scenario metadata into SQLite for
-              reproducible experiment tracking.
-            </li>
-            <li>
-              Built Streamlit dashboards and tearsheet analytics for NAV comparison, return analysis, drawdowns,
-              Sharpe/Sortino/Calmar, VaR/CVaR, turnover, cost drag, and ETF price inspection.
-            </li>
-            <li>
-              Optimized expensive covariance calculations using C++/pybind11 integration, precomputed return views, and
-              caching to improve scenario-testing performance.
-            </li>
-            <li>
-              Refactored macro data handling to store raw FRED series only while computing derived features such as
-              inflation direction, yield curve, labour weakness, and growth signals at runtime.
-            </li>
-          </ul>
-          <h4>Technologies</h4>
-          <div className="project-tags">
-            <span className="project-tag">Python</span>
-            <span className="project-tag">SQLite</span>
-            <span className="project-tag">Streamlit</span>
-            <span className="project-tag">C++ / pybind11</span>
-            <span className="project-tag">EWMA</span>
-            <span className="project-tag">GARCH</span>
-            <span className="project-tag">FRED</span>
-          </div>
-          <h4>Source Code</h4>
-          <div className="project-links">
-            <a href="https://github.com/mega-Slaking/systematic_trading_model" target="_blank" rel="noreferrer">
-              Publicly available code and README — github.com/mega-Slaking/systematic_trading_model
-            </a>
-          </div>
-        </ExpandableItem>
 
-        <ExpandableItem
-          variant="project"
-          title="Honours Thesis"
-          summary="Computational Modelling of the effects of Oriented External Electric Fields on Glycine"
-          buttonText="View More Details"
-        >
-          <h4>Overview</h4>
-          <p>
-            The project focused on simulating the behavior of glycine molecules under varying external electric fields.
-          </p>
-          <h4>Key Highlights</h4>
-          <ul>
-            <li>
-              Developed a three-dimensional model to map glycine&apos;s potential energy surface by varying dihedral angles,
-              forming the foundation for advanced predictive modeling.
-            </li>
-            <li>
-              Investigated and applied modified Shepard interpolation methods, leveraging first and second-order derivatives
-              to enhance predictive accuracy and enable model extrapolation.
-            </li>
-            <li>
-              Created and implemented rotation matrices for precise data transformation and molecular orientation in
-              computational simulations.
-            </li>
-            <li>
-              Modeled glycine&apos;s interactions under varying electric fields (x, y, z) to characterize enzyme binding and
-              structural changes, leveraging computational data analysis techniques.
-            </li>
-            <li>
-              Engineered the first full-dimensional (24-dimensional) data model for a molecule larger than three atoms,
-              showcasing innovation in high-dimensional modeling.
-            </li>
-            <li>
-              Validated the model by accurately predicting glycine&apos;s behavior in biologically relevant environments,
-              such as water, as seen in the visualisations below.
-            </li>
-          </ul>
-          <h4>Thesis Document</h4>
-          <div className="project-links">
-            <a href={thesisPdf} target="_blank" rel="noreferrer">
-              Check this file out here — view the methods used to create these predictive models.
-            </a>
+      {openProject ? (
+        <ProjectDetail project={openProject} />
+      ) : (
+        <>
+          <h2>Projects</h2>
+          <div className="project-grid">
+            {PROJECTS.map((project) => (
+              <button
+                key={project.slug}
+                type="button"
+                className={`project-card ${project.flagship ? 'project-card--flagship' : ''}`}
+                onClick={() => openDetail(project.slug)}
+                aria-label={`View project: ${project.title}`}
+              >
+                <ProjectMeta project={project} />
+                <h3 className="project-card__title">{project.title}</h3>
+                <p className="project-card__impact">{project.impact}</p>
+                <div className="project-tags project-card__tags">
+                  {project.tags.slice(0, 5).map((tag) => (
+                    <span key={tag} className="project-tag">{tag}</span>
+                  ))}
+                  {project.tags.length > 5 ? (
+                    <span className="project-tag project-tag--more">+{project.tags.length - 5}</span>
+                  ) : null}
+                </div>
+                <span className="project-card__cta">View project →</span>
+              </button>
+            ))}
           </div>
-          <h4>Visualisations</h4>
-          <div className="project-media-grid">
-            <img src={yFieldGif} alt="Application of y-electric field" className="project-gif" />
-            <img src={xFieldGif} alt="Application of x-electric field" className="project-gif" />
-            <img src={zFieldGif} alt="Application of z-electric field" className="project-gif" />
-            <img src={yzFieldGif} alt="Application of yz-electric field" className="project-gif" />
-            <img src={waterGif} alt="Modelling Glycine in water" className="project-gif" />
-          </div>
-        </ExpandableItem>
-
-        <ExpandableItem
-          variant="project"
-          title="Cartier Data Analysis Project"
-          summary="Worked together in an interdisciplinary team to provide a solution for Cartier&apos;s boutique zoning traffic"
-          buttonText="More details"
-        >
-          <h4>Key Highlights</h4>
-          <ul>
-            <li>
-              <strong>Data Analysis and Insights:</strong> Analyzed customer engagement data using Pandas and Matplotlib to investigate
-              inconsistencies between Cartier&apos;s online and in-store traffic trends.
-            </li>
-            <li>
-              <strong>Data Visualization:</strong> Created visual models to highlight key discrepancies, revealing that in-store jewelry zones
-              had significantly higher traffic, while online data indicated watches as the most viewed category.
-            </li>
-            <li>
-              <strong>Problem Identification:</strong> Identified a disconnect between online engagement trends and in-store customer behavior,
-              providing actionable insights for boutique traffic management.
-            </li>
-            <li>
-              <strong>Data-Driven Recommendations:</strong> Leveraged insights and research on the psychology of zoning to propose boutique
-              rezoning strategies aimed at optimizing customer flow and increasing engagement with key product categories.
-            </li>
-          </ul>
-          <h4>Technologies</h4>
-          <div className="project-tags">
-            <span className="project-tag">Python</span>
-            <span className="project-tag">Pandas</span>
-            <span className="project-tag">Matplotlib</span>
-          </div>
-        </ExpandableItem>
-
-        <ExpandableItem
-          variant="project"
-          title="Raspberry Pi AI-Assisted Development Orchestrator"
-          summary="A Raspberry Pi-hosted AI development orchestrator that lets me trigger Claude/OpenClaw coding tasks from Telegram, automatically create PRs from safe feature branches, run validation checks, and preview frontend changes privately over Tailscale before merging."
-          buttonText="More details"
-        >
-          <h4>Overview</h4>
-          <p>
-            Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub,
-            Claude Code, OpenClaw, and custom Python/Bash orchestration scripts.
-          </p>
-          <h4>Key Highlights</h4>
-          <ul>
-            <li>
-              Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude
-              Code, OpenClaw, Python, and Bash.
-            </li>
-            <li>
-              Designed a phone-first development workflow where Telegram commands trigger scoped AI coding tasks, branch
-              creation, validation, PR generation, and private preview links.
-            </li>
-            <li>
-              Implemented branch safety controls including dev-branch integration, protected main/master avoidance,
-              task-specific branch prefixes, dirty-working-tree checks, and manual PR review boundaries.
-            </li>
-            <li>
-              Integrated Tailscale to securely preview Vite/React frontend branches from a phone without exposing local
-              development servers to the public internet.
-            </li>
-            <li>
-              Added operational safeguards including AI task kill switches, model/cost control separation, timeout
-              handling, agent prompt guardrails, and separation between bot-owned Telegram control and agent-owned code
-              execution.
-            </li>
-          </ul>
-          <h4>Technologies</h4>
-          <div className="project-tags">
-            <span className="project-tag">Raspberry Pi</span>
-            <span className="project-tag">Python</span>
-            <span className="project-tag">Bash</span>
-            <span className="project-tag">Telegram</span>
-            <span className="project-tag">Tailscale</span>
-            <span className="project-tag">GitHub</span>
-            <span className="project-tag">Claude Code</span>
-            <span className="project-tag">OpenClaw</span>
-          </div>
-        </ExpandableItem>
-
-        <ExpandableItem
-          variant="project"
-          title="Raspberry Pi AI-Assisted Development Orchestrator"
-          summary="A Raspberry Pi-hosted AI development orchestrator that lets me trigger Claude/OpenClaw coding tasks from Telegram, automatically create PRs from safe feature branches, run validation checks, and preview frontend changes privately over Tailscale before merging."
-          buttonText="More details"
-        >
-          <p>
-            Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub,
-            Claude Code, OpenClaw, and custom Python/Bash orchestration scripts. Highlights include:
-          </p>
-          <ul>
-            <li>
-              Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude
-              Code, OpenClaw, Python, and Bash.
-            </li>
-            <li>
-              Designed a phone-first development workflow where Telegram commands trigger scoped AI coding tasks, branch
-              creation, validation, PR generation, and private preview links.
-            </li>
-            <li>
-              Implemented branch safety controls including dev-branch integration, protected main/master avoidance,
-              task-specific branch prefixes, dirty-working-tree checks, and manual PR review boundaries.
-            </li>
-            <li>
-              Integrated Tailscale to securely preview Vite/React frontend branches from a phone without exposing local
-              development servers to the public internet.
-            </li>
-            <li>
-              Added operational safeguards including AI task kill switches, model/cost control separation, timeout
-              handling, agent prompt guardrails, and separation between bot-owned Telegram control and agent-owned code
-              execution.
-            </li>
-          </ul>
-        </ExpandableItem>
-      </div>
+        </>
+      )}
     </section>
   );
 }
@@ -445,7 +460,7 @@ function ExperiencePage() {
   return (
     <section id="experience-page" className="content-page">
       <div className="page-actions">
-        <a href="#projects">Back to Projects and Experience</a>
+        <a href="#projects">← Back to Home</a>
       </div>
       <h2>Experience</h2>
       <div className="timeline">
@@ -638,7 +653,7 @@ function BlogPage() {
   return (
     <section id="blog-page" className="content-page">
       <div className="page-actions">
-        <a href="#projects">Back to Projects and Experience</a>
+        <a href="#projects">← Back to Home</a>
       </div>
       <h2>Blog</h2>
       <div className="blog-list">
