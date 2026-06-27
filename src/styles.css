@@ -869,20 +869,23 @@ footer {
 }
 
 .shatter-card--hover {
-  transform: scale(1.03);
+  transform: scale(1.12);
+  border-color: #0ff;
   box-shadow:
-    0 0 18px rgba(0, 255, 255, 0.45),
-    0 0 42px rgba(0, 255, 255, 0.15);
+    0 0 26px rgba(0, 255, 255, 0.55),
+    0 0 60px rgba(0, 255, 255, 0.25);
+  z-index: 5;
 }
 
-/* Chromatic aberration on label during hover */
+/* Grow + chromatic aberration on label during hover */
 .shatter-card--hover .shatter-card__label {
+  transform: scale(1.12);
   text-shadow:
     -2px 0 2px rgba(255, 30, 80, 0.55),
     2px 0 2px rgba(0, 240, 255, 0.55);
 }
 
-/* Allow fragments to escape the card bounds during shatter */
+/* Allow fragments to escape the card bounds during shatter, in 3D space */
 .shatter-card--shatter {
   overflow: visible;
   background: transparent;
@@ -890,6 +893,8 @@ footer {
   box-shadow: none;
   transform: none;
   transition: none;
+  perspective: 700px;
+  transform-style: preserve-3d;
 }
 
 .shatter-card__label {
@@ -897,7 +902,7 @@ footer {
   pointer-events: none;
   position: relative;
   z-index: 1;
-  transition: opacity 0.05s;
+  transition: opacity 0.05s, transform 0.25s ease, text-shadow 0.25s ease;
 }
 
 /* Crack SVG overlay */
@@ -909,14 +914,14 @@ footer {
 }
 
 .shatter-card__cracks line {
-  stroke: rgba(160, 235, 255, 0.92);
-  stroke-width: 0.8;
+  stroke: rgba(190, 245, 255, 0.96);
+  stroke-width: 1.1;
   stroke-linecap: round;
   /* Animate each crack line drawing itself in */
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  filter: drop-shadow(0 0 2px rgba(0, 210, 255, 0.85));
-  animation: sc-draw-crack 0.3s ease-out forwards;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  filter: drop-shadow(0 0 3px rgba(0, 220, 255, 0.95));
+  animation: sc-draw-crack 0.26s ease-out forwards;
 }
 
 @keyframes sc-draw-crack {
@@ -932,16 +937,19 @@ footer {
   background: #111;
   z-index: 3;
   pointer-events: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  border: 1px solid rgba(0, 220, 255, 0.35);
   /* Slight blue-tinted gloss to sell the glass aesthetic */
   background-image: linear-gradient(
     135deg,
-    rgba(0, 160, 220, 0.12) 0%,
+    rgba(0, 160, 220, 0.18) 0%,
     transparent 55%
   );
   transition:
-    transform 0.9s cubic-bezier(0.15, 0.35, 0.25, 1),
-    opacity 0.65s ease-out,
-    filter 0.8s ease-out;
+    transform 1.05s cubic-bezier(0.12, 0.55, 0.2, 1),
+    opacity 0.9s ease-out,
+    filter 0.95s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
