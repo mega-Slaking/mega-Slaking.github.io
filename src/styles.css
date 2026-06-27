@@ -416,7 +416,7 @@ section {
   padding-left: 24px;
 }
 
-.project-grid .hidden-content li + li {
+.hidden-content li + li {
   margin-top: 10px;
 }
 
