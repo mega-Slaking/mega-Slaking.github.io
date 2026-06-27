@@ -70,95 +70,142 @@ header nav a:hover {
 
 /* ===== Carousel Picker ===== */
 
-.carousel-picker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 24px 0;
-}
-
-.carousel-track {
-  position: relative;
-  flex: 1;
-  height: 220px;
-  perspective: 900px;
-}
-
-.carousel-slot {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 340px;
-  transition:
-    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.55s ease,
-    filter 0.55s ease;
-}
-
-.carousel-slot--central {
-  transform: translate(-50%, -50%) rotateY(0deg) scale(1);
-  opacity: 1;
-  filter: brightness(1);
-  z-index: 2;
-  pointer-events: auto;
-}
-
-.carousel-slot--central .shatter-card {
-  min-height: 200px;
-  box-shadow:
-    0 0 28px rgba(0, 255, 255, 0.28),
-    0 12px 32px rgba(0, 0, 0, 0.45);
-}
-
-.carousel-slot--right {
-  transform: translate(calc(-50% + 260px), -50%) rotateY(-22deg) scale(0.62);
-  opacity: 0.38;
-  filter: brightness(0.6);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.carousel-slot--left {
-  transform: translate(calc(-50% - 260px), -50%) rotateY(22deg) scale(0.62);
-  opacity: 0.38;
-  filter: brightness(0.6);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.carousel-arrow {
-  flex-shrink: 0;
+/* ===== Orbit navigation: manual 3D coverflow of cards around the photo ===== */
+.orbit {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  gap: 12px;
+  margin: 8px 0 28px;
+  perspective: calc(var(--orbit-base) * 2.7);
+  /* Master size — scales with the viewport, capped for small/large screens.
+     Every other dimension below is derived from it so proportions hold. */
+  --orbit-base: clamp(380px, 50vw, 560px);
+  /* How far the card cluster sits below the photo's centre */
+  --orbit-drop: calc(var(--orbit-base) * 0.224);
+}
+
+.orbit-stage {
+  position: relative;
+  width: var(--orbit-base);
+  height: calc(var(--orbit-base) * 0.963);
+  max-width: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Circular cropped photo with cyan rings — sits at the centre of the scene (z = 0) */
+.orbit-photo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--orbit-base) * 0.533);
+  height: calc(var(--orbit-base) * 0.533);
+  margin: calc(var(--orbit-base) * -0.267) 0 0 calc(var(--orbit-base) * -0.267);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(153, 255, 255, 0.5);
+  box-shadow:
+    0 0 0 8px rgba(0, 255, 255, 0.06),
+    0 0 38px rgba(0, 255, 255, 0.28),
+    0 0 88px rgba(0, 255, 255, 0.12);
+  transform: translateZ(0);
+}
+
+.orbit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Each card animates between three slots: centred front, or angled left/right.
+   rotateX tilts the faces to look downward; the selected card sits forward. */
+.orbit-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--orbit-base) * 0.370);
+  margin: calc(var(--orbit-base) * -0.093) 0 0 calc(var(--orbit-base) * -0.185);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s ease,
+    filter 0.5s ease;
+  pointer-events: none;
+}
+
+.orbit-slot.is-center {
+  transform: translateY(var(--orbit-drop)) translateZ(calc(var(--orbit-base) * 0.185)) rotateX(-20deg);
+  opacity: 1;
+  filter: brightness(1);
+  pointer-events: auto;
+}
+
+.orbit-slot.is-right {
+  transform:
+    translateY(var(--orbit-drop)) translateX(calc(var(--orbit-base) * 0.344)) translateZ(calc(var(--orbit-base) * -0.0815))
+    rotateY(-52deg) rotateX(-16deg) scale(0.82);
+  opacity: 0.5;
+  filter: brightness(0.62);
+}
+
+.orbit-slot.is-left {
+  transform:
+    translateY(var(--orbit-drop)) translateX(calc(var(--orbit-base) * -0.344)) translateZ(calc(var(--orbit-base) * -0.0815))
+    rotateY(52deg) rotateX(-16deg) scale(0.82);
+  opacity: 0.5;
+  filter: brightness(0.62);
+}
+
+.orbit-slot .shatter-card {
+  min-height: calc(var(--orbit-base) * 0.1815);
+  border-width: 2px;
+  border-radius: 12px;
+  box-shadow:
+    0 0 18px rgba(0, 255, 255, 0.22),
+    0 10px 26px rgba(0, 0, 0, 0.5);
+}
+
+.orbit-slot .shatter-card__label {
+  font-size: calc(var(--orbit-base) * 0.063);
+}
+
+/* Prev/next controls, dropped to sit level with the lowered card cluster */
+.orbit-arrow {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--orbit-base) * 0.093);
+  height: calc(var(--orbit-base) * 0.093);
   background: rgba(0, 255, 255, 0.07);
   border: 1px solid rgba(153, 255, 255, 0.28);
   border-radius: 50%;
   color: #99FFFF;
-  font-size: 30px;
+  font-size: calc(var(--orbit-base) * 0.063);
   line-height: 1;
   padding: 0;
   cursor: pointer;
   font-family: 'Iceland', sans-serif;
+  transform: translateY(var(--orbit-drop));
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-  z-index: 3;
 }
 
-.carousel-arrow:hover:not(:disabled) {
+.orbit-arrow:hover {
   background: rgba(0, 255, 255, 0.18);
   border-color: rgba(153, 255, 255, 0.6);
   color: #0ff;
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
 }
 
-.carousel-arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.carousel-arrow:focus-visible {
+.orbit-arrow:focus-visible {
   outline: 2px solid rgba(0, 255, 255, 0.6);
   outline-offset: 2px;
 }
@@ -327,13 +374,6 @@ section {
   font-family: 'Iceland', sans-serif;
 }
 
-.image-content img {
-  max-width: 250px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 28px rgba(0, 255, 255, 0.18), 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
 .toggle-btn {
   display: flex;
   width: 100%;
@@ -466,6 +506,49 @@ section {
   border: 1px solid rgba(153, 255, 255, 0.2);
 }
 
+.contact-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: #99FFFF;
+  background: rgba(0, 255, 255, 0.07);
+  border: 1px solid rgba(153, 255, 255, 0.28);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.contact-icon:hover {
+  background: rgba(0, 255, 255, 0.18);
+  border-color: rgba(153, 255, 255, 0.6);
+  color: #0ff;
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.contact-icon:focus-visible {
+  outline: 2px solid rgba(0, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 footer {
   background: #333;
   color: white;
@@ -491,10 +574,6 @@ footer {
     max-width: none;
   }
 
-  .image-content img {
-    max-width: 310px;
-  }
-
   #projects {
     max-width: 1100px;
     margin: 0 auto;
@@ -517,26 +596,54 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .carousel-track {
-    height: 200px;
+  .orbit {
+    perspective: 900px;
+    --orbit-drop: 86px;
   }
 
-  .carousel-slot {
-    width: 240px;
+  /* Arrows hidden on touch — navigate by swiping the cards instead */
+  .orbit-arrow {
+    display: none;
   }
 
-  .carousel-slot--right {
-    transform: translate(calc(-50% + 165px), -50%) rotateY(0deg) scale(0.55);
+  .orbit-stage {
+    width: 300px;
+    height: 360px;
   }
 
-  .carousel-slot--left {
-    transform: translate(calc(-50% - 165px), -50%) rotateY(0deg) scale(0.55);
+  .orbit-photo {
+    width: 164px;
+    height: 164px;
+    margin: -82px 0 0 -82px;
   }
 
-  .carousel-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 24px;
+  .orbit-slot {
+    width: 128px;
+    margin: -33px 0 0 -64px;
+  }
+
+  .orbit-slot.is-center {
+    transform: translateY(var(--orbit-drop)) translateZ(56px) rotateX(-20deg);
+  }
+
+  .orbit-slot.is-right {
+    transform:
+      translateY(var(--orbit-drop)) translateX(118px) translateZ(-28px)
+      rotateY(-52deg) rotateX(-16deg) scale(0.8);
+  }
+
+  .orbit-slot.is-left {
+    transform:
+      translateY(var(--orbit-drop)) translateX(-118px) translateZ(-28px)
+      rotateY(52deg) rotateX(-16deg) scale(0.8);
+  }
+
+  .orbit-slot .shatter-card {
+    min-height: 62px;
+  }
+
+  .orbit-slot .shatter-card__label {
+    font-size: 21px;
   }
 
   .timeline {
@@ -678,6 +785,11 @@ footer {
   .shatter-fragment {
     transition: none !important;
     animation: none !important;
+  }
+
+  /* Keep the coverflow layout but drop the sliding animation between cards */
+  .orbit-slot {
+    transition: none !important;
   }
 }
 

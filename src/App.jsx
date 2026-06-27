@@ -100,8 +100,7 @@ function HomePage() {
     <>
       <AboutSection />
       <section id="projects">
-        <h2>Projects, Experience and Blog</h2>
-        <CarouselPicker />
+        <OrbitNav />
       </section>
       <ContactSection />
     </>
@@ -114,39 +113,12 @@ const NAV_ITEMS = [
   { label: 'Blog', href: '#/blog' },
 ];
 
-function CarouselPicker() {
+function OrbitNav() {
   const [selected, setSelected] = useState(0);
-  const [animating, setAnimating] = useState(false);
-  const [direction, setDirection] = useState(1);
-  const timerRef = useRef(null);
   const touchStartRef = useRef(null);
   const n = NAV_ITEMS.length;
 
-  useEffect(() => () => clearTimeout(timerRef.current), []);
-
-  const doSwitch = (dir) => {
-    if (animating) return;
-    setDirection(dir);
-    setAnimating(true);
-    clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => {
-      setSelected(s => (s + dir + n) % n);
-      setAnimating(false);
-    }, 560);
-  };
-
-  const getSlotClass = (idx) => {
-    if (!animating) {
-      if (idx === selected) return 'carousel-slot--central';
-      if (idx === (selected + 1) % n) return 'carousel-slot--right';
-      return 'carousel-slot--left';
-    }
-    // During animation: show items at their destination positions
-    const next = (selected + direction + n) % n;
-    if (idx === next) return 'carousel-slot--central';
-    if (idx === (next + 1) % n) return 'carousel-slot--right';
-    return 'carousel-slot--left';
-  };
+  const go = (dir) => setSelected((s) => (s + dir + n) % n);
 
   const handleTouchStart = (e) => {
     const t = e.touches[0];
@@ -159,40 +131,43 @@ function CarouselPicker() {
     const dx = t.clientX - touchStartRef.current.x;
     const dy = t.clientY - touchStartRef.current.y;
     touchStartRef.current = null;
-    // Require horizontal movement to dominate and exceed threshold
+    // Require a mostly-horizontal swipe past a threshold
     if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
-    doSwitch(dx < 0 ? 1 : -1);
+    go(dx < 0 ? 1 : -1);
+  };
+
+  // Position relative to the selected card: centre, or peripheral left/right
+  const slotClass = (idx) => {
+    const rel = (idx - selected + n) % n;
+    if (rel === 0) return 'is-center';
+    if (rel === 1) return 'is-right';
+    return 'is-left';
   };
 
   return (
-    <div className="carousel-picker" role="group" aria-label="Projects, experience, and blog navigation">
-      <button
-        className="carousel-arrow"
-        onClick={() => doSwitch(-1)}
-        aria-label="Previous"
-        disabled={animating}
-        type="button"
-      >
+    <div className="orbit">
+      <button className="orbit-arrow" onClick={() => go(-1)} aria-label="Previous" type="button">
         ‹
       </button>
       <div
-        className="carousel-track"
+        className="orbit-stage"
+        role="group"
+        aria-label="Projects, experience, and blog navigation"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {NAV_ITEMS.map((item, idx) => (
-          <div key={item.label} className={`carousel-slot ${getSlotClass(idx)}`}>
-            <ShatterCard label={item.label} href={item.href} />
-          </div>
-        ))}
+        <div className="orbit-photo">
+          <img src={profileImage} alt="Kish Kharka" />
+        </div>
+        <div className="orbit-ring">
+          {NAV_ITEMS.map((item, idx) => (
+            <div key={item.label} className={`orbit-slot ${slotClass(idx)}`}>
+              <ShatterCard label={item.label} href={item.href} className="orbit-card" />
+            </div>
+          ))}
+        </div>
       </div>
-      <button
-        className="carousel-arrow"
-        onClick={() => doSwitch(1)}
-        aria-label="Next"
-        disabled={animating}
-        type="button"
-      >
+      <button className="orbit-arrow" onClick={() => go(1)} aria-label="Next" type="button">
         ›
       </button>
     </div>
@@ -206,16 +181,15 @@ function AboutSection() {
         <div className="text-container">
           <h2>About Me</h2>
           <p>
-            Ambitious and adaptable, I am a Bachelor of Science graduate from the University of Sydney with majors in
-            Physics and Chemistry (Honours - First Class). I excel in problem-solving, thrive in diverse environments,
-            and possess a strong background in scientific research, programming, and technology. With proven abilities in
-            predictive analytics, automation, and technical platforms through my role at Westpac, I am eager to contribute
-            and expand my expertise in development and DevOps. Recently, I have developed a strong interest in trading and
-            financial markets, further diversifying my skill set and expanding my perspective in the realm of finance.
+            I am a science-trained technologist with a First Class Honours background in Physics and Chemistry from the
+            University of Sydney, focused on building data, analytics, and automation systems for financial markets. My
+            work spans predictive analytics, front-office tooling, infrastructure automation, and decision-support
+            applications across trading, hedging, CRM, and enterprise technology environments.
           </p>
-        </div>
-        <div className="image-content">
-          <img src={profileImage} alt="Profile Picture" />
+          <p>
+            I am working toward becoming a quantitative researcher, combining my background in scientific problem-solving
+            with software engineering, market data pipelines, systematic strategy research, and financial modelling.
+          </p>
         </div>
       </div>
     </section>
@@ -758,9 +732,31 @@ function ContactSection() {
   return (
     <section id="contact">
       <h2>Contact</h2>
-      <p>
-        Email: <a href="mailto:parmanandkharka@protonmail.com">parmanandkharka@protonmail.com</a>
-      </p>
+      <div className="contact-links">
+        <a
+          className="contact-icon"
+          href="mailto:parmanandkharka@protonmail.com"
+          aria-label="Email Kish Kharka"
+          title="parmanandkharka@protonmail.com"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-10 6L2 7" />
+          </svg>
+        </a>
+        <a
+          className="contact-icon"
+          href="https://github.com/mega-Slaking"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile (opens in a new tab)"
+          title="github.com/mega-Slaking"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+        </a>
+      </div>
     </section>
   );
 }
