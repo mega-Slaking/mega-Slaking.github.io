@@ -343,7 +343,7 @@ const PROJECTS = [
       },
     ],
     media: [],
-    links: [{ label: 'Related write-up: Building a Phone-First AI Development Workflow', href: '#/blog/phone-first-ai-workflow' }],
+    links: [],
   },
   {
     slug: 'cartier-data-analysis',
@@ -703,34 +703,21 @@ function ExperiencePage() {
 
 const BLOG_POSTS = [
   {
-    slug: 'trading-engine',
-    title: 'trading engine',
+    slug: 'why-quant-research',
+    title: 'Why Quant Research?',
     date: 'June 2026',
-    summary: '',
-    tags: [],
-    body: [],
-  },
-  {
-    slug: 'honours-thesis',
-    title: 'Honours Thesis',
-    date: 'June 2026',
-    summary: '',
-    tags: [],
-    body: [],
-  },
-  {
-    slug: 'phone-first-ai-workflow',
-    title: 'Building a Phone-First AI Development Workflow',
-    date: 'June 2026',
-    summary: 'How I combined a Raspberry Pi, Telegram, Tailscale, Claude Code, OpenClaw, Python, Bash, and GitHub pull requests to create a private AI-assisted development workflow that I can use from my phone.',
-    tags: ['Raspberry Pi', 'AI-Assisted Engineering', 'Telegram', 'Tailscale', 'Claude Code', 'OpenClaw', 'Python', 'Bash', 'GitHub Automation'],
+    summary:
+      'An honest account of how I got here: studying physics and chemistry without even knowing what a quant was, finding my way through engineering and financial markets, and realising that quantitative research is where I want to be.',
+    tags: ['Quant Research', 'Career', 'Reflection'],
     body: [
-      'I wanted a development workflow that was available even when I was away from my laptop. The result was a Raspberry Pi-based orchestration system that acts as an always-on remote execution environment.',
-      'Telegram provides the command interface. From my phone, I can trigger scoped AI-assisted coding tasks, create safe feature branches, run repository-specific validation commands, open pull requests, and start private frontend previews.',
-      'Python and Bash scripts form the automation backbone. Claude Code and OpenClaw perform scoped code changes, while the orchestration layer controls branch creation, testing, commits, pushes, and pull request creation. This separation keeps the AI worker focused on implementation while the surrounding system enforces the workflow.',
-      'Tailscale provides a private network between my phone and the Raspberry Pi. This lets me open Vite/React branch previews without exposing development servers to the public internet.',
-      'GitHub pull requests remain the final review boundary. AI can generate and iterate on changes, but I still inspect the diff, test the result, and decide whether to merge or reject the work.',
-      'The project started as a convenient way to make portfolio UI changes remotely, but it has developed into a broader experiment in controlled AI-assisted engineering, mobile-first development, and human-in-the-loop automation.',
+      'I studied physics and chemistry at university for a simple reason: I love understanding how things work at the lowest level, and I love facing challenges. What I did not do was leave university and walk straight into a quant graduate program. The honest reason is that I had no idea what a quant even was at the time. The path I am on now is something I found gradually, not something I planned from the start.',
+      'My honours thesis was where it clicked. It was a computational chemistry problem, modelling how glycine responds to external electric fields by building high-dimensional surrogate models of its energy and dipole surfaces. What captivated me was not only the chemistry; it was being able to write programs that simulate a piece of the real world and predict how it behaves. That discipline of building and validating a model without fooling yourself has stayed with me ever since.',
+      'That experience is what pushed me toward software engineering. I wanted to strengthen my coding so I could build better systems for simulating and solving real-world problems, instead of being limited by my tools. Getting good at the engineering felt like the prerequisite for everything else I wanted to do.',
+      'In 2024 I started as a graduate at Westpac, initially doing automation engineering. I could see the value in the work, but I also knew I could contribute more. Fortunately the program gave me the chance to move through the financial markets and treasury spaces, and that is where things started coming together.',
+      'It was there that I learned what applied engineering looks like in a financial context, properly came across quantitative finance for the first time, and began seeing the parallels with the research and modelling I had done at university. I also met genuinely capable and inspiring people who made me want to be in those rooms, doing that kind of work.',
+      'The graduate program could not ultimately place me in an engineering role within those spaces, which was disappointing. But it did not change where I want to go; if anything, it made the direction clearer. I have spent a lot of my time outside of work building my own systems and teaching myself the things I want to get better at.',
+      'That self-directed work is why I built my own systematic research and backtesting platform, less as a hunt for one winning strategy and more as a small research lab for testing market hypotheses with traceable, reproducible decisions. Markets are, in the end, another complex system to model, with the added difficulty that the system reacts to being modelled and the signal is faint and non-stationary. That is exactly what makes them interesting, and doing it well demands the same scientific honesty I first learned in the lab.',
+      'What draws me specifically to research, rather than only building or trading, is the loop: form a hypothesis, design a test that could genuinely disprove it, run it under realistic costs and constraints, and let the evidence change your mind. I am at the start of this rather than the end of it, but the more I work on it, the more convinced I am that quantitative research is where my training in modelling, my engineering, and my curiosity about markets all point. I still hope to contribute to real solutions in finance, and I am working to get there.',
     ],
   },
 ];
