@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { Fragment, useEffect, useId, useRef, useState } from 'react';
 import { ShatterCard } from './ShatterCard.jsx';
 
 import profileImage from '../profile.jpg';
@@ -207,23 +207,43 @@ const PROJECTS = [
     category: 'Quantitative Research',
     year: '',
     impact:
-      'A modular Python research and backtesting platform for systematic bond-ETF allocation across macro regimes, volatility/covariance models, and risk-aware portfolio construction.',
-    tags: ['Python', 'SQLite', 'Streamlit', 'C++ / pybind11', 'EWMA', 'GARCH', 'FRED'],
-    overview:
-      'Built a modular quantitative research platform for testing systematic asset-allocation strategies across bond ETFs, macroeconomic regimes, volatility models, and portfolio construction rules. The platform ingests market and macroeconomic data, computes price and macro signals, classifies economic/monetary regimes, generates allocation decisions, applies risk-aware sizing and constraints, persists scenario results to SQLite, and surfaces performance analytics through a Streamlit dashboard.',
-    highlights: [
-      'Built a modular Python research platform for systematic asset-allocation experiments across bond ETFs including TLT, AGG, and SHY.',
-      'Designed a decision-centric strategy pipeline covering macro/price signal generation, regime classification, base allocation, volatility-aware position sizing, portfolio constraints, and final allocation tracing.',
-      'Implemented scenario factories to compare strategy variants across EWMA/GARCH volatility models, sample/EWMA covariance scaling, conviction scaling, and portfolio volatility targeting.',
-      'Persisted backtest results, decision traces, costs, turnover, NAV, and scenario metadata into SQLite for reproducible experiment tracking.',
-      'Built Streamlit dashboards and tearsheet analytics for NAV comparison, return analysis, drawdowns, Sharpe/Sortino/Calmar, VaR/CVaR, turnover, cost drag, and ETF price inspection.',
-      'Optimized expensive covariance calculations using C++/pybind11 integration, precomputed return views, and caching to improve scenario-testing performance.',
-      'Refactored macro data handling to store raw FRED series only while computing derived features such as inflation direction, yield curve, labour weakness, and growth signals at runtime.',
+      'A full-stack research platform for designing, testing, and analysing systematic bond ETF allocation strategies across macro regimes, volatility models, and risk-aware portfolio construction.',
+    tags: ['Python', 'SQLite', 'Streamlit', 'FastAPI', 'React', 'C++ / pybind11', 'EWMA', 'GARCH', 'FRED'],
+    sections: [
+      {
+        heading: 'Overview',
+        paragraphs: [
+          'Systematic strategy research becomes unreliable when data ingestion, signal logic, portfolio construction, performance analysis, and experiment tracking are handled through disconnected scripts or ad hoc notebooks. I built this platform to solve that problem: an end-to-end research environment that transforms raw market and macroeconomic data into reproducible strategy decisions, backtest results, diagnostics, and interactive analytics.',
+          'The platform functions as a small quantitative research lab for testing market hypotheses, comparing strategy assumptions, and analysing how systematic allocation rules behave across changing macro and market environments. It focuses on bond ETF rotation across TLT, AGG, and SHY, using macroeconomic conditions, price momentum, volatility estimates, covariance models, and portfolio constraints to evaluate how a strategy should rotate across duration exposure in different regimes.',
+          'The core research question was: can macro and market signals be converted into a disciplined, repeatable allocation process rather than a collection of discretionary observations? Answering that required more than calculating returns. The system needed to show why each allocation was made, how decisions changed across regimes, how transaction costs and turnover affected performance, and whether different volatility and covariance assumptions materially changed the portfolio outcome.',
+        ],
+      },
+      {
+        heading: 'Platform Architecture',
+        paragraphs: [
+          'The Python research engine handles data ingestion, signal generation, regime classification, portfolio construction, cost modelling, and scenario execution. A FastAPI backend exposes research runs, scenario outputs, analytics, and stored results through a clean API layer. A React frontend provides an interactive interface for exploring strategy behaviour, comparing scenarios, inspecting allocations, and interpreting performance diagnostics.',
+          'Backtest outputs, decision traces, costs, turnover, regime labels, NAV series, scenario metadata, and performance analytics are persisted to SQLite, creating a reproducible experiment-tracking layer for comparing research assumptions over time.',
+        ],
+      },
+      {
+        heading: 'Key Contributions',
+        bullets: [
+          'Built a decision-centric backtesting engine that traces the full path from raw data to final portfolio allocation, covering signal generation, regime classification, base allocation, volatility-aware sizing, portfolio constraints, turnover, transaction costs, and NAV calculation.',
+          'Designed a modular strategy architecture supporting systematic experimentation across macro logic, price signals, rolling/EWMA/GARCH volatility models, sample and EWMA covariance scaling, conviction weighting, and portfolio volatility targeting.',
+          'Developed a FastAPI backend to expose backtest runs, scenario metadata, analytics outputs, decision traces, and portfolio diagnostics through structured API endpoints, separating the research engine from the user-facing application layer.',
+          'Built a React frontend that separates strategy exploration from the research engine, allowing scenario comparison, allocation inspection, and performance diagnostics without re-running backtests.',
+          'Implemented reproducible scenario factories that persist backtest results, regime labels, decision traces, costs, turnover, NAV, and analytics outputs to SQLite, creating an experiment-tracking system rather than relying on one-off notebook outputs.',
+          'Added explainability through allocation traces and regime summaries, allowing each portfolio decision to be inspected in terms of the macro, price, volatility, covariance, and constraint logic that produced it.',
+          'Built analytics and tearsheet functionality covering NAV comparison, return analysis, drawdowns, Sharpe, Sortino, Calmar, VaR, CVaR, turnover, cost drag, benchmark comparison, exposure inspection, regime performance, and ETF price analysis.',
+          'Optimised expensive covariance and repeated scenario-testing workflows using C++/pybind11, precomputed return views, and caching, improving performance for iterative research and parameter sweeps.',
+          'Refactored macro data handling to store raw FRED series while computing derived indicators at runtime, improving data lineage, reproducibility, and flexibility when testing alternative feature definitions.',
+        ],
+      },
     ],
     media: [],
     links: [
       {
-        label: 'Source code & README — github.com/mega-Slaking/systematic_trading_model',
+        label: 'View source code & README ↗',
         href: 'https://github.com/mega-Slaking/systematic_trading_model',
       },
     ],
@@ -235,16 +255,42 @@ const PROJECTS = [
     category: 'Computational Chemistry',
     year: '',
     impact:
-      "Computational modelling of the effects of oriented external electric fields on glycine — including the first full 24-dimensional potential-energy model for a molecule larger than three atoms.",
+      "Computational modelling of the effects of oriented external electric fields on glycine, including the first full 24-dimensional potential-energy model for a molecule larger than three atoms.",
     tags: ['Python', 'Shepard Interpolation', 'Potential Energy Surfaces', 'Rotation Matrices'],
-    overview: 'The project focused on simulating the behavior of glycine molecules under varying external electric fields.',
-    highlights: [
-      "Developed a three-dimensional model to map glycine's potential energy surface by varying dihedral angles, forming the foundation for advanced predictive modeling.",
-      'Investigated and applied modified Shepard interpolation methods, leveraging first and second-order derivatives to enhance predictive accuracy and enable model extrapolation.',
-      'Created and implemented rotation matrices for precise data transformation and molecular orientation in computational simulations.',
-      "Modeled glycine's interactions under varying electric fields (x, y, z) to characterize enzyme binding and structural changes, leveraging computational data analysis techniques.",
-      'Engineered the first full-dimensional (24-dimensional) data model for a molecule larger than three atoms, showcasing innovation in high-dimensional modeling.',
-      "Validated the model by accurately predicting glycine's behavior in biologically relevant environments, such as water, as seen in the visualisations below.",
+    sections: [
+      {
+        heading: 'The Problem',
+        paragraphs: [
+          "Quantum-chemistry calculations describe a molecule's energy and charge distribution one geometry at a time, in a vacuum. But real molecules live inside electric fields, such as those in enzyme active sites, solvents, and charged interfaces, and those fields reshape molecular conformation and can drive reactions such as proton transfer. Characterising that response by brute force is intractable: every new field direction and magnitude would demand re-running expensive electronic-structure calculations across a configuration space with dozens of degrees of freedom. The field of oriented-external-field (OEEF) chemistry lacked a tractable, general way to model this.",
+        ],
+      },
+      {
+        heading: 'The Approach',
+        paragraphs: [
+          'I reframed the problem as a surrogate-modelling task built on a first-order linear-response expansion, V(E) ≈ V₀ − μ·E. This decouples an otherwise coupled problem: build two geometry-dependent surfaces once, the zero-field potential-energy surface (PES) and the dipole-moment surface (DMS), and the effect of any field direction or strength collapses to a cheap analytic evaluation, with no further quantum chemistry required.',
+        ],
+        bullets: [
+          'Generated the training data from 1,369 constrained geometry optimisations (HF/6-31+G(d,p)) on a 36×36 dihedral-angle grid, orchestrated as batch jobs on the NCI Gadi supercomputer via a Python/Fortran pipeline.',
+          'Implemented modified Shepard interpolation, scattered-data interpolation using distance-weighted local Taylor expansions, to reconstruct the surfaces from sampled geometries. Built both zeroth- and first-order (derivative-corrected) variants, in C++ and Fortran, with analytic and numerical first/second-order derivatives.',
+          'Calibrated the model by sweeping the inverse-distance weighting exponent p and benchmarking zeroth- vs. first-order expansions against held-out data, training on 324 geometries and validating on 1,045 unseen points.',
+          'Scaled from a 2-D proof of concept to full dimensionality: a 24-dimensional PES and a 30-dimensional Cartesian DMS, with rotation-matrix standardisation of molecular orientation and permutational symmetry exploited to extend the effective dataset.',
+        ],
+      },
+      {
+        heading: 'The Outcome',
+        bullets: [
+          'First-order interpolation cut out-of-sample RMSE by ~30% across all dipole components versus the zeroth-order baseline; the full-dimensional PES reproduced exact quantum energies to < 0.3 kJ/mol.',
+          'Delivered the first full-dimensional dipole-moment surface for a molecule as large as glycine (10 atoms, 30 Cartesian dimensions), extending a method previously demonstrated only on triatomics.',
+          'Quantified a controllable physical effect: a field aligned with the proton-transfer reaction axis stabilises the reactive (zwitterionic) conformation by ~70 kJ/mol, while a reversed field suppresses it, a proof of concept for field-driven control of molecular reactivity.',
+          "Validated against known physiology: the model correctly recovers the stabilisation of glycine's zwitterionic form in high-field environments such as water and enzyme active sites.",
+        ],
+      },
+      {
+        heading: 'What It Demonstrates',
+        paragraphs: [
+          'End-to-end quantitative modelling: framing an intractable simulation problem as a tractable surrogate, building and calibrating high-dimensional interpolation models, rigorous train/validation methodology, and a multi-language numerical pipeline (Python, C++, Fortran) running at HPC scale.',
+        ],
+      },
     ],
     media: [
       { src: yFieldGif, alt: 'Application of y-electric field' },
@@ -254,6 +300,50 @@ const PROJECTS = [
       { src: waterGif, alt: 'Modelling Glycine in water' },
     ],
     links: [{ label: 'View the thesis methods (PDF)', href: thesisPdf }],
+  },
+  {
+    slug: 'raspberry-pi-ai-orchestrator',
+    title: 'Raspberry Pi Agentic Development Orchestrator',
+    flagship: false,
+    category: 'AI Infrastructure',
+    year: '',
+    impact:
+      'A private AI-assisted development orchestration platform for running controlled agentic coding workflows from a Raspberry Pi, with Telegram-based task control, GitHub pull-request boundaries, Tailscale previews, validation gates, and operational guardrails.',
+    tags: ['Raspberry Pi', 'Python', 'Bash', 'Telegram', 'Tailscale', 'GitHub', 'Claude Code', 'OpenClaw'],
+    sections: [
+      {
+        heading: 'Overview',
+        paragraphs: [
+          'Agentic coding tools are powerful, but they introduce a different class of engineering risk from ordinary automation. An agent may edit the wrong files, loop unnecessarily, exceed cost limits, touch secrets, modify protected branches, skip validation, or produce changes that are difficult to review. Rather than treating AI as an unrestricted coding assistant, this project treats it as a worker inside a governed delivery pipeline, and builds the infrastructure to make that practical.',
+          'The system runs on a Raspberry Pi as a lightweight private development server, connected to Telegram, GitHub, Tailscale, Claude Code, OpenClaw, Python, and Bash automation. From a phone, I can trigger scoped coding tasks that create isolated feature branches, run AI-assisted code changes, execute validation steps, generate pull requests, and expose private frontend previews, without opening local development services to the public internet.',
+        ],
+      },
+      {
+        heading: 'Platform Architecture',
+        paragraphs: [
+          'The Raspberry Pi acts as the orchestration host. Telegram provides the phone-first control interface, while Python and Bash scripts coordinate repository selection, branch creation, task execution, validation, pull request creation, and preview management.',
+          'Claude Code and OpenClaw operate as coding agents within the workflow, but they do not own the delivery boundary. GitHub remains the review and integration layer, Tailscale provides private network access for frontend previews, and the orchestrator enforces operational controls around task execution, branch safety, cost exposure, and human approval before any changes are merged.',
+        ],
+      },
+      {
+        heading: 'Key Contributions',
+        bullets: [
+          'Designed the core orchestration model: AI agents perform scoped coding work inside controlled task envelopes, but cannot independently plan across repositories, modify protected branches, access sensitive files, or bypass the pull-request review boundary.',
+          'Implemented a phone-first control interface via Telegram, separating task dispatch from code execution and keeping agents constrained to repository-specific execution paths.',
+          'Built guardrails for agentic loops: repository allowlists, branch isolation, dirty-working-tree checks, sensitive-file protections, execution timeouts, kill switches, cost controls, and prompt guardrails.',
+          'Integrated Tailscale to privately preview Vite/React frontend changes from a phone without exposing local development servers to the public internet.',
+          'Created a prototype framework for human-in-the-loop agentic software delivery, where AI agents perform useful development work but merge, deployment, and review authority remain with the engineer.',
+        ],
+      },
+      {
+        heading: 'What It Demonstrates',
+        paragraphs: [
+          'Agentic coding systems need orchestration, not just prompts. This project demonstrates an understanding of the infrastructure required to make AI-assisted development safe, observable, and reviewable, combining private infrastructure, Git workflow controls, validation gates, network isolation, and human review boundaries to integrate AI agents into real software delivery without giving up engineering discipline.',
+        ],
+      },
+    ],
+    media: [],
+    links: [{ label: 'Related write-up: Building a Phone-First AI Development Workflow', href: '#/blog/phone-first-ai-workflow' }],
   },
   {
     slug: 'cartier-data-analysis',
@@ -286,27 +376,6 @@ const PROJECTS = [
     media: [],
     links: [],
   },
-  {
-    slug: 'raspberry-pi-ai-orchestrator',
-    title: 'Raspberry Pi AI-Assisted Development Orchestrator',
-    flagship: false,
-    category: 'AI Infrastructure',
-    year: '',
-    impact:
-      'A Raspberry Pi-hosted orchestrator that triggers Claude/OpenClaw coding tasks from Telegram, auto-creates PRs from safe feature branches, runs validation, and previews frontend changes privately over Tailscale.',
-    tags: ['Raspberry Pi', 'Python', 'Bash', 'Telegram', 'Tailscale', 'GitHub', 'Claude Code', 'OpenClaw'],
-    overview:
-      'Built a private AI-assisted development infrastructure using a Raspberry Pi, Telegram, Tailscale, GitHub, Claude Code, OpenClaw, and custom Python/Bash orchestration scripts.',
-    highlights: [
-      'Built a Raspberry Pi-based AI-assisted development orchestrator using Telegram, Tailscale, GitHub, Claude Code, OpenClaw, Python, and Bash.',
-      'Designed a phone-first development workflow where Telegram commands trigger scoped AI coding tasks, branch creation, validation, PR generation, and private preview links.',
-      'Implemented branch safety controls including dev-branch integration, protected main/master avoidance, task-specific branch prefixes, dirty-working-tree checks, and manual PR review boundaries.',
-      'Integrated Tailscale to securely preview Vite/React frontend branches from a phone without exposing local development servers to the public internet.',
-      'Added operational safeguards including AI task kill switches, model/cost control separation, timeout handling, agent prompt guardrails, and separation between bot-owned Telegram control and agent-owned code execution.',
-    ],
-    media: [],
-    links: [{ label: 'Related write-up: Building a Phone-First AI Development Workflow', href: '#/blog/phone-first-ai-workflow' }],
-  },
 ];
 
 function ProjectMeta({ project }) {
@@ -338,23 +407,59 @@ function ProjectDetail({ project }) {
       <h2>{project.title}</h2>
       <p className="project-detail__lead">{project.impact}</p>
 
-      {project.overview ? (
-        <>
-          <h4>Overview</h4>
-          <p>{project.overview}</p>
-        </>
+      {project.links?.length ? (
+        <div className="project-detail__actions">
+          {project.links.map((link) =>
+            link.href.startsWith('http') ? (
+              <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                {link.label}
+              </a>
+            ) : (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ),
+          )}
+        </div>
       ) : null}
 
-      {project.highlights?.length ? (
-        <>
-          <h4>Key Highlights</h4>
-          <ul>
-            {project.highlights.map((item, i) => (
-              <ProjectHighlight key={i} item={item} />
-            ))}
-          </ul>
-        </>
-      ) : null}
+      {project.sections?.length
+        ? project.sections.map((section, i) => (
+            <Fragment key={i}>
+              <h4>{section.heading}</h4>
+              {section.paragraphs?.map((paragraph, j) => (
+                <p key={j}>{paragraph}</p>
+              ))}
+              {section.bullets?.length ? (
+                <ul>
+                  {section.bullets.map((item, j) => (
+                    <ProjectHighlight key={j} item={item} />
+                  ))}
+                </ul>
+              ) : null}
+            </Fragment>
+          ))
+        : (
+          <>
+            {project.overview ? (
+              <>
+                <h4>Overview</h4>
+                <p>{project.overview}</p>
+              </>
+            ) : null}
+
+            {project.highlights?.length ? (
+              <>
+                <h4>Key Highlights</h4>
+                <ul>
+                  {project.highlights.map((item, i) => (
+                    <ProjectHighlight key={i} item={item} />
+                  ))}
+                </ul>
+              </>
+            ) : null}
+          </>
+        )}
 
       {project.media?.length ? (
         <>
@@ -374,25 +479,6 @@ function ProjectDetail({ project }) {
             {project.tags.map((tag) => (
               <span key={tag} className="project-tag">{tag}</span>
             ))}
-          </div>
-        </>
-      ) : null}
-
-      {project.links?.length ? (
-        <>
-          <h4>Links</h4>
-          <div className="project-links">
-            {project.links.map((link) =>
-              link.href.startsWith('http') ? (
-                <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
-                  {link.label}
-                </a>
-              ) : (
-                <a key={link.href} href={link.href}>
-                  {link.label}
-                </a>
-              ),
-            )}
           </div>
         </>
       ) : null}
