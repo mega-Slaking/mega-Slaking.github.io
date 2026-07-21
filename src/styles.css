@@ -1075,6 +1075,27 @@ footer {
   color: rgba(153, 255, 255, 0.85);
 }
 
+.blog-post__figure {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.blog-post__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.25);
+}
+
+.blog-post__figure figcaption {
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(153, 255, 255, 0.65);
+}
+
 .blog-post__body {
   display: grid;
   gap: 16px;
