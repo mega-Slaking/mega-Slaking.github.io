@@ -2,6 +2,7 @@ import { Fragment, useEffect, useId, useRef, useState } from 'react';
 import { ShatterCard } from './ShatterCard.jsx';
 
 import profileImage from '../profile.jpg';
+import debatePic from '../debate_pic.jpg';
 import thesisPdf from '../theory_methods_marked.pdf';
 import xFieldGif from '../gifs/X_field.gif';
 import yFieldGif from '../gifs/y_field.gif';
@@ -703,6 +704,27 @@ function ExperiencePage() {
 
 const BLOG_POSTS = [
   {
+    slug: 'passing-the-torch',
+    title: 'Passing the Torch',
+    date: 'July 2026',
+    summary:
+      'Two years ago I stood up as first speaker in the TYN vs. Executives debate. This year I was asked to coach a team of three preparing for it instead of competing myself. They took the negative and won, an opportunity that let me put my leadership skills and domain expertise to the test, and I came out of it well.',
+    tags: ['Leadership', 'The Youth Network', 'Reflection'],
+    image: {
+      src: debatePic,
+      alt: 'The team I coached at the TYN vs. Executives debate',
+    },
+    body: [
+      'Two years ago I stood up as the first speaker for the negative team in the TYN vs. Executives debate, arguing that AI would not replace executive jobs. This year, I was presented with the leadership opportunity to coach the new team preparing for it.',
+      'The Youth Network (Westpac) runs this debate as a friendly contest between its younger members and the executive team, and it is deliberately a stretch for everyone involved. Standing up in front of leadership and holding a position under pressure is exactly the kind of thing early-career people rarely get to practise. I did a bit of debating back in high school, so I was well versed in the mindset and how to structure a good argument. Teaching that to others was quite fulfilling and was a bit like passing the torch.',
+      'They came in with different levels of experience: some had debated in high school, others had never done it at all. I started by defining the role each speaker had to play and how to go about it. Without getting too technical, you can think of the team as an arrow. The first speaker sets the direction, establishing the definitions and opening the case, like the head of an arrow. The second speaker does some rebuttal and carries the main body of arguments, tying the first and third speakers together, like the shaft. The third speaker mostly rebuts to debunk the opponent’s case while also summarising their own team’s, much like how the tail of an arrow stabilises it mid-flight and keeps it on course.',
+      'The next thing was structuring their arguments. Whether it was a main point or a rebuttal, the underlying recipe was mostly the same. Make a claim. Back it up with evidence, whether that’s citations, statistics, or examples. Then link the claim back to the topic, showing how it supports your argument or weakens the opposition’s. They all picked this up quickly and effectively. Copilot was quite helpful with preparing evidence, so maybe I should’ve argued the affirmative two years ago (just kidding).',
+      'Finally, it was all about presentation: pacing their words, using eye contact and hand gestures, and engaging with the audience when they could. Some tricks were shared, like staring at the horizon just above the audience while talking, so everyone thinks you’re looking at someone else (when really you’re looking at no one), and using intentional pauses to buy time, take a breath, and deepen the impact of your words all at once. After some dry runs, they were ready.',
+      'Watching them, I did feel a bit nervous, but I knew they would do well. The team won, taking the negative against the executives, and I was genuinely proud of them for standing up and holding their own in front of senior leaders.',
+      'I used to think leadership was only about being the top dog, but after some actual practice, I’m learning the importance of making the people around you more capable and stepping back to observe their progress. Being trusted to pass on something that was once passed to me is one of the more meaningful things I have been asked to do, and I truly hope I do get more opportunities to be a leader.',
+    ],
+  },
+  {
     slug: 'why-quant-research',
     title: 'Why Quant Research?',
     date: 'June 2026',
@@ -772,6 +794,12 @@ function BlogPostPage({ slug }) {
         <h2>{post.title}</h2>
         <p className="blog-post__date">{post.date}</p>
         <p className="blog-post__summary">{post.summary}</p>
+        {post.image && (
+          <figure className="blog-post__figure">
+            <img className="blog-post__image" src={post.image.src} alt={post.image.alt} />
+            {post.image.caption && <figcaption>{post.image.caption}</figcaption>}
+          </figure>
+        )}
         <div className="blog-post__body">
           {post.body.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
